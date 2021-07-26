@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+
+<h2 style="border-bottom-style: double;">All CR Records</h2>
+<table cellpadding="2" cellspacing="2" border="2">
+<tr>
+<th>JiraNo</th>
+<th>JiraCustomer</th>
+<th>Title</th>
+<th>Status</th>
+<th>ProjectManager</th>
+<th>CreationDate</th>
+<th>Effort</th>
+<th>CRFormDate</th>
+<th>Effort</th>
+<th>EffortApprovalDate</th>
+<th>PlannedUatDate</th>
+<th>ActualUatDate</th>
+<th>LiveApprovalDate</th>
+<th>Release Date</th>
+
+</tr>
+<h:form>
+	<ui:repeat var="jira" value="#{jiraBean.jiras}">
+		<tr>
+		<td>#{jira.jiraNo}</td>
+		<td>#{jiraBean.jira.jiraCustomers}</td>
+		<td>#{jira.jiraTitle}</td>
+		<td>#{jira.jiraStatus}</td>
+		<td>#{jira.projectManager}</td>
+		<td>#{jira.creationDate}</td>
+		<td>#{jira.effort}</td>
+		<td>#{jira.crFormDate}</td>
+		<td>#{jira.effort}</td>
+		<td>#{jira.effortApprovalDate}</td>
+		<td>#{jira.plannedUatDate}</td>
+		<td>#{jira.actualUatDate}</td>
+		<td>#{jira.liveApprovalDate}</td>
+		<td>#{jira.releaseDate}</td>
+		
+		<td><h:column>
+			<f:facet name="header">Action</f:facet>
+			<h:commandLink action="#{jiraBean.viewJira(jira)}" value="ClickToUpdate" />
+		</h:column></td>
+		</tr>
+	</ui:repeat>
+	
+</h:form>
+</table>
+
+</body> 
+</html>

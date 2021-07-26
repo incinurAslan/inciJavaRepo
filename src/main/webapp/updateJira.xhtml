@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+      
+<h:head></h:head> 
+<body> 
+<h:form>
+
+<h3 style="border-bottom-style: double;">Details of the Selected Jira</h3>
+
+<h4>Selected Jira Details:</h4>
+	JiraNo: <h:outputText value="#{jiraBean.selectedJira.jiraNo}" />
+	JiraTitle: <h:outputText value="#{jiraBean.selectedJira.jiraTitle}" />
+	JiraStatus: <h:outputText value="#{jiraBean.selectedJira.jiraStatus}" />
+	ProjectManager: <h:outputText value="#{jiraBean.selectedJira.projectManager}" />
+	CreatedDate: <h:outputText value="#{jiraBean.selectedJira.creationDate}" />
+	Effort: <h:outputText value="#{jiraBean.selectedJira.effort}" />
+	CRFormDate: <h:outputText value="#{jiraBean.selectedJira.crFormDate}" />
+	EffortApprovalDate: <h:outputText value="#{jiraBean.selectedJira.effortApprovalDate}" />
+	PlannedUATDate: <h:outputText value="#{jiraBean.selectedJira.plannedUatDate}" />
+	ActualUATDate: <h:outputText value="#{jiraBean.selectedJira.actualUatDate}" />
+	ReleaseApprovalDate: <h:outputText value="#{jiraBean.selectedJira.liveApprovalDate}" />
+	ReleaseDate: <h:outputText value="#{jiraBean.selectedJira.releaseDate}" />
+	
+
+<h3 style="border-bottom-style: double;">Update Jira Details</h3>
+	
+	<h:panelGrid columns="4">
+		 <h:outputLabel value="Jira Title" for="jt" />
+		 <h:inputText value="#{jiraBean.selectedJira.jiraTitle}" id="jt" required="true" requiredMessage="*"/>
+		 <h:message for="jt"/>
+	
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+		
+		<h:outputLabel value="Status" for="jst" />
+		 <h:inputText value="#{jiraBean.selectedJira.jiraStatus}" id="jst" required="true" requiredMessage="*"/>
+		 <h:message for="jst"/>
+		 
+
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+	
+		 <h:outputLabel value="Project Manager" for="prm" />
+		 <h:inputText value="#{jiraBean.selectedJira.projectManager}" id="prm" required="true" requiredMessage="*"/>
+		 <h:message for="prm"/>
+		 
+		 
+	
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+		
+		
+		 <h:outputLabel value="Creation Date" for="crd" />
+		 <h:inputText value="#{jiraBean.selectedJira.creationDate}" id="crd" required="false" requiredMessage="*"/>
+		 <h:outputText>
+		 <f:convertDateTime pattern="yyyy-MM-dd"/>
+		 </h:outputText>
+		 <h:message for="crd"/>
+		 
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+		 
+		 <h:outputLabel value="CR Effort" for="cef" />
+		 <h:inputText value="#{jiraBean.selectedJira.effort}" id="cef" required="false" requiredMessage="*"/>
+		 <h:message for="cef"/>
+
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+		
+		 <h:outputLabel value="CR Form Date" for="cfd" />
+		 <h:inputText value="#{jiraBean.selectedJira.crFormDate}" id="cfd" required="false" requiredMessage="*"/>
+		 <h:message for="cfd"/>
+	
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+		
+		 	 
+		 <h:outputLabel value="CR Approval Date" for="cad" />
+		 <h:inputText value="#{jiraBean.selectedJira.effortApprovalDate}" id="cad" required="false" requiredMessage="*"/>
+		 <h:outputText>
+		 <f:convertDateTime pattern="yyyy-MM-dd"/>
+		 </h:outputText>
+		 <h:message for="cad"/>
+		 
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+		 
+		 <h:outputLabel value="Planned UAT Date" for="pud" />
+		 <h:inputText value="#{jiraBean.selectedJira.plannedUatDate}" id="pud" required="false" requiredMessage="*"/>
+		 <h:outputText>
+		 <f:convertDateTime pattern="yyyy-MM-dd"/>
+		 </h:outputText>
+		 <h:message for="pud"/>
+		
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+		 
+		 <h:outputLabel value="Actual UAT Date" for="aud" />
+		 <h:inputText value="#{jiraBean.selectedJira.actualUatDate}" id="aud" required="false" requiredMessage="*"/>
+		 <h:outputText>
+		 <f:convertDateTime pattern="yyyy-MM-dd"/>
+		 </h:outputText>
+		 <h:message for="aud"/>
+		 
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+		
+		 <h:outputLabel value="Release Approval Date" for="lad" />
+		 <h:inputText value="#{jiraBean.selectedJira.liveApprovalDate}" id="lad" required="false" requiredMessage="*"/>
+		 <h:outputText>
+		 <f:convertDateTime pattern="yyyy-MM-dd"/>
+		 </h:outputText>
+		 <h:message for="lad"/>
+		 
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+	<br/>
+	
+		<h:outputLabel value="Release Date" for="rd" />
+		<h:inputText value="#{jiraBean.selectedJira.releaseDate}" id="rd" required="false" requiredMessage="*"/>
+		<h:outputText>
+		<f:convertDateTime pattern="yyyy-MM-dd"/>
+		</h:outputText>
+		<h:message for="rd"/>
+		
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+	
+		<h:outputText />
+		<h:commandButton action="#{jiraBean.updateJira(jiraBean.selectedJira)}" value="Update" />
+		<h:outputText />
+	
+	</h:panelGrid>
+	
+</h:form>
+
+</body> 
+</html>
