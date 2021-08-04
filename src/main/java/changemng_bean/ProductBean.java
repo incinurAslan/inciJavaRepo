@@ -16,9 +16,6 @@ import changemng_services.ProductService;
 @SessionScoped
 public class ProductBean implements Serializable {
 
-	//private static final long serialVersionUID = 1L;
-	
-
 	@Inject
 	private ProductService productService;
 
@@ -26,7 +23,7 @@ public class ProductBean implements Serializable {
 	
 	private List<Product> products;
 	
-	private List<Product> selectedProducts;
+	//private List<Product> selectedProducts;
 	
 	private int productId;
 	
@@ -35,7 +32,7 @@ public class ProductBean implements Serializable {
 	public void init() {
 		this.products = productService.getAllProducts();
 		this.product = new Product();
-		this.selectedProducts = new ArrayList<Product>();
+		//this.selectedProducts = new ArrayList<Product>();
 	}
 	
 	
@@ -56,11 +53,11 @@ public class ProductBean implements Serializable {
 	public ProductService getProductService() {
 		return productService;
 	}
-
-	
-	public void submit() {
-	    System.out.println("Selected products: " + selectedProducts);
-	}
+//
+//	
+//	public void submit() {
+//	    System.out.println("Selected products: " + selectedProducts);
+//	}
 	
 	public void setProductService(ProductService productService) {
 		this.productService = productService;
@@ -97,15 +94,15 @@ public class ProductBean implements Serializable {
 	}
 
 
-	public List<Product> getSelectedProducts() {
-		return selectedProducts;
-	}
-
-
-	public void setSelectedProducts(List<Product> selectedProducts) {
-		this.selectedProducts = selectedProducts;
-	}
-	
+//	public List<Product> getSelectedProducts() {
+//		return selectedProducts;
+//	}
+//
+//
+//	public void setSelectedProducts(List<Product> selectedProducts) {
+//		this.selectedProducts = selectedProducts;
+//	}
+//	
 	
 	
 	

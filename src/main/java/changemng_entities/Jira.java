@@ -1,21 +1,18 @@
 package changemng_entities;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
 
 @Entity
 public class Jira {
@@ -53,7 +50,7 @@ public class Jira {
 	private List<Product> jiraProducts = new ArrayList<Product>();
 	
 	//added lately
-	@ManyToMany(mappedBy = "customerJiras" ,cascade = {CascadeType.ALL}) 
+	@ManyToMany(mappedBy = "customerJiras" ,cascade = {CascadeType.ALL}, fetch = FetchType.EAGER) 
 	private List<Customer> jiraCustomers = new ArrayList<Customer>();
 	
 	

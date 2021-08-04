@@ -20,6 +20,7 @@ public class JiraService {
 	
 	private Customer customer;
 	private Product product;
+	
 	private CustomerInvoice customerInvoice;
 	private SupplierInvoice suuplierInvoice;
 	

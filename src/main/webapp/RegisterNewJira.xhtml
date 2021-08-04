@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+
+<h3 style="border-bottom-style: double;">Register New CR Jira</h3>
+
+<h:form>
+
+	<h:panelGrid columns="3">
+		 <h:outputLabel value="Jira No" for="jn" />
+		 <h:inputText value="#{jiraBean.jira.jiraNo}" id="jn" required="true" requiredMessage="*"/>
+		 <h:message for="jn"/>
+		
+		 <h:outputLabel value="Jira Title" for="jtt" />
+		 <h:inputText value="#{jiraBean.jira.jiraTitle}" id="jtt" required="true" requiredMessage="*"/>
+		 <h:message for="jtt"/>
+		
+		
+		 <h:outputLabel value="Project Manager" for="pm" />
+		 <h:inputText value="#{jiraBean.jira.projectManager}" id="pm" required="true" requiredMessage="*"/>
+		 <h:message for="pm"/>
+		
+		 <h:outputLabel value="Jira Status" for="jst" />
+		 <h:inputText value="#{jiraBean.jira.jiraStatus}" id="jst" required="true" requiredMessage="*"/>
+		 <h:message for="jst"/>
+		 
+		 <h:outputLabel value="Creation Date" for="jcd" />
+		 <h:inputText value="#{jiraBean.creationDateStr}" id="jcd" required="true" requiredMessage="*"/>
+		 <h:message for="jcd"/>
+		
+		 <h:outputLabel value="CR Effort" for="cef" />
+		 <h:inputText value="#{jiraBean.selectedJira.effort}" converterId="javax.faces.Double" id="cef" required="false" requiredMessage="*"/>
+		 <h:message for="cef"/>
+
+		 <h:outputLabel value="CR Form Date" for="jcrfd" />
+		 <h:inputText value="#{jiraBean.crFormDateStr}" id="jcrfd" required="true" requiredMessage="*"/>
+		 <h:message for="jcrfd"/>
+
+
+ 		 <h:outputLabel value="Effort Approval Date" for="jead" />
+		 <h:inputText value="#{jiraBean.effortApprovalDateStr}" id="jead" required="true" requiredMessage="*"/>
+		 <h:message for="jead"/>
+		 
+
+		 <h:outputLabel value="Planned UAT Date" for="jpud" />
+		 <h:inputText value="#{jiraBean.plannedUATdateStr}" id="jpud" required="true" requiredMessage="*"/>
+		 <h:message for="jpud"/>
+		 
+		 
+		 <h:outputLabel value="Actual UAT Date" for="jaud" />
+		 <h:inputText value="#{jiraBean.actualUATdateStr}" id="jaud" required="true" requiredMessage="*"/>
+		 <h:message for="jaud"/>
+		 
+		 
+		 <h:outputLabel value="Live Approval Date" for="jlad" />
+		 <h:inputText value="#{jiraBean.liveApprovalDateStr}" id="jlad" required="true" requiredMessage="*"/>
+		 <h:message for="jlad"/>
+		 
+		 <h:outputLabel value="Release Date" for="jrd" />
+		 <h:inputText value="#{jiraBean.releaseDateStr}" id="jrd" required="true" requiredMessage="*"/>
+		 <h:message for="jrd"/>
+		 
+		<h:outputLabel value="Jira Customer" for="jcs" />
+		<h:selectManyListbox value="#{jiraBean.selectedCustomers}"
+		title="Bir veya birden fazla müşteri adı seçiniz.">
+    	<f:selectItems value="#{jiraBean.selectCustomers}" var="customerItem" itemLabel="#{customerItem.customerName}"
+    	itemValue="#{customerItem.customerNo}"/>
+		</h:selectManyListbox>
+		<h:message for="jcs"/>
+		 
+		<h:outputLabel value="Jira Products" for="jprd" />
+		<h:selectManyListbox value="#{jiraBean.selectedProducts}" title="Bir veya birden fazla ürün adı seçiniz.">>
+    	<f:selectItems value="#{jiraBean.selectProducts}" var="productItem" itemLabel="#{productItem.productName}"
+    	itemValue="#{productItem.productNo}" />
+		</h:selectManyListbox>
+		<h:message for="jprd"/>
+
+		<h:outputText />
+		<h:commandButton action="#{jiraBean.saveNewJira()}" value="Save Jira" />
+		<h:outputText />
+		
+		
+
+	</h:panelGrid>
+	
+ </h:form>
+
+
+</body> 
+</html>
