@@ -55,10 +55,7 @@ public class Product {
 	
 	public void setProductName(String productName) {
 		this.productName = productName;
-	}
-
-
-	
+	}	
 
 	
 	public List<Jira> getProductJiras() {
@@ -83,7 +80,7 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return " " + productName;
+		return productNo + " - " + productName;
 	}
 
 

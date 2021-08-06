@@ -15,7 +15,6 @@ public class SupplierInvoice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int suppInvoiceNo;
-	private String supplierInvoiceStatus;
 	private LocalDate supplierInvoiceDate;
 	
 	@OneToOne
@@ -29,12 +28,10 @@ public class SupplierInvoice {
 	
 
 
-	public SupplierInvoice(String supplierInvoiceStatus, LocalDate supplierInvoiceDate) {
+	public SupplierInvoice(LocalDate supplierInvoiceDate) {
 		super();
-		this.supplierInvoiceStatus = supplierInvoiceStatus;
 		this.supplierInvoiceDate = supplierInvoiceDate;
 	}
-
 
 
 	public int getSuppInvoiceNo() {
@@ -46,15 +43,6 @@ public class SupplierInvoice {
 		this.suppInvoiceNo = suppInvoiceNo;
 	}
 
-
-	public String getSupplierInvoiceStatus() {
-		return supplierInvoiceStatus;
-	}
-
-
-	public void setSupplierInvoiceStatus(String supplierInvoiceStatus) {
-		this.supplierInvoiceStatus = supplierInvoiceStatus;
-	}
 
 
 	public LocalDate getSupplierInvoiceDate() {
@@ -83,13 +71,9 @@ public class SupplierInvoice {
 
 	@Override
 	public String toString() {
-		return "SupplierInvoice [suppInvoiceNo=" + suppInvoiceNo + ", supplierInvoiceStatus=" + supplierInvoiceStatus
-				+ ", supplierInvoiceDate=" + supplierInvoiceDate + ", supplierInvoicedJira=" + supplierInvoicedJira
-				+ "]";
+		return "SupplierInvoice [suppInvoiceNo=" + suppInvoiceNo + ", supplierInvoiceDate=" + supplierInvoiceDate
+				+ ", supplierInvoicedJira=" + supplierInvoicedJira + "]";
 	}
-
-
-	
 	
 	
 	

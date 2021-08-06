@@ -20,6 +20,7 @@ public class ProductBean implements Serializable {
 	private ProductService productService;
 
 	private Product product;
+	 
 	
 	private List<Product> products;
 	

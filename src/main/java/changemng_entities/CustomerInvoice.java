@@ -16,7 +16,7 @@ public class CustomerInvoice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int invoiceNo;
-	private String customerInvoiceStatus;
+//	private String customerInvoiceStatus;
 	private LocalDate customerInvoiceDate;
 	
 	
@@ -28,9 +28,9 @@ public class CustomerInvoice {
 	private Jira invoicedJira;
 
 
-	public CustomerInvoice(String customerInvoiceStatus, LocalDate customerInvoiceDate) {
+
+	public CustomerInvoice(LocalDate customerInvoiceDate) {
 		super();
-		this.customerInvoiceStatus = customerInvoiceStatus;
 		this.customerInvoiceDate = customerInvoiceDate;
 	}
 
@@ -42,16 +42,6 @@ public class CustomerInvoice {
 	
 	public void setInvoiceNo(int invoiceNo) {
 		this.invoiceNo = invoiceNo;
-	}
-	
-	
-	public String getCustomerInvoiceStatus() {
-		return customerInvoiceStatus;
-	}
-	
-	
-	public void setCustomerInvoiceStatus(String customerInvoiceStatus) {
-		this.customerInvoiceStatus = customerInvoiceStatus;
 	}
 	
 	
@@ -80,7 +70,7 @@ public class CustomerInvoice {
 
 	@Override
 	public String toString() {
-		return "CustomerInvoice [invoiceNo=" + invoiceNo + ", customerInvoiceStatus=" + customerInvoiceStatus
+		return "CustomerInvoice [invoiceNo=" + invoiceNo 
 				+ ", customerInvoiceDate=" + customerInvoiceDate + "]";
 	}
 	

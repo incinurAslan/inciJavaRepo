@@ -46,13 +46,17 @@ public class Jira {
 	private SupplierInvoice supplierJiraInvoice;
 	
 	
-	@ManyToMany(mappedBy = "productJiras" ,cascade = {CascadeType.ALL}) 
+	@ManyToMany(mappedBy = "productJiras" ,cascade = {CascadeType.ALL})
+	
 	private List<Product> jiraProducts = new ArrayList<Product>();
 	
 	//added lately
-	@ManyToMany(mappedBy = "customerJiras" ,cascade = {CascadeType.ALL}, fetch = FetchType.EAGER) 
+	@ManyToMany(mappedBy = "customerJiras" ,cascade = {CascadeType.ALL}) 
 	private List<Customer> jiraCustomers = new ArrayList<Customer>();
+
 	
+	@OneToOne
+	private InvoiceStatus InvoiceStatusJira;
 	
 	
 	public Jira() {
@@ -224,9 +228,6 @@ public class Jira {
 		this.jiraProducts = jiraProducts;
 	}
 
-	
-	
-	
 
 	public SupplierInvoice getSupplierJiraInvoice() {
 		return supplierJiraInvoice;
@@ -245,6 +246,20 @@ public class Jira {
 
 	public void setJiraCustomers(List<Customer> jiraCustomers) {
 		this.jiraCustomers = jiraCustomers;
+	}
+
+	
+	
+	
+
+
+	public InvoiceStatus getInvoiceStatusJira() {
+		return InvoiceStatusJira;
+	}
+
+
+	public void setInvoiceStatusJira(InvoiceStatus invoiceStatusJira) {
+		InvoiceStatusJira = invoiceStatusJira;
 	}
 
 

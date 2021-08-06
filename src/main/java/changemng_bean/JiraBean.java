@@ -12,9 +12,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import changemng_entities.Customer;
+import changemng_entities.CustomerInvoice;
+import changemng_entities.InvoiceStatus;
 import changemng_entities.Jira;
 import changemng_entities.Product;
 import changemng_services.CustomerService;
+import changemng_services.InvoiceStatusService;
 import changemng_services.JiraService;
 import changemng_services.ProductService;
 
@@ -25,13 +28,16 @@ public class JiraBean implements Serializable{
 
 	@Inject
 	private JiraService jiraService;
-
 	
 	@Inject
 	private CustomerService customerService;
 	
 	@Inject
 	private ProductService productService;
+	
+	@Inject
+	private InvoiceStatusService invoiceService;
+	
 	
 	private Jira jira;
 	
@@ -50,19 +56,25 @@ public class JiraBean implements Serializable{
 	private String actualUATdateStr;
 	private String liveApprovalDateStr;
 	private String releaseDateStr;
+	private String customerInvoiceDateStr;
 	
 	private List<Customer> customers;
 	private List<Product> products;
 	
 	private List<Object> selectedCustomers;
-	
 	private List<Customer> selectCustomers;
 	
 
 	private List<Object> selectedProducts;
 	private List<Product> selectProducts;
 	
-
+	//private InvoiceStatus selectedInvoiceStatus;
+	
+	//private InvoiceStatus selectedInvoiceStatus;
+	private List<InvoiceStatus> invoiceStatusList;
+	
+	
+	
 	@PostConstruct
 	public void init() {
 		
@@ -71,36 +83,22 @@ public class JiraBean implements Serializable{
 		this.selectedJira = new Jira();
 		this.newJira = new Jira();
 		
-		//selectedCustomers = new ArrayList<Object>();
-		//selectedProducts = new ArrayList<Object>();
-		
+	//	this.selectedInvoiceStatus = new InvoiceStatus();
+		invoiceStatusList = invoiceService.getAllInvoiceStatus();
+	
 		selectedCustomers = new ArrayList<Object>();
 		selectedProducts = new ArrayList<Object>();
 				
-				
-		//this.selectCustomers = new ArrayList<Customer>();
 		this.customers = customerService.getAllCustomers();
 		selectCustomers = customerService.getAllCustomers();
 		
 		this.products = productService.getAllProducts();
 		selectProducts = productService.getAllProducts();
-		//this.selectProducts = new ArrayList<Product>();
-		
 
-		
-//		for (Customer c : customers) {
-//			selectCustomers.add(new Customer(c.getCustomerName(), c.getMandayRate()));
-//		}
-//
-//		for (Product p : products) {
-//			selectProducts.add(new Product(p.getProductName()));
-//			
-//			//System.out.println(p.getProductName());
-//		}
-		
 	}
 
 
+	
 	public String saveNewJira() {
 		
 		//formatter
@@ -113,7 +111,9 @@ public class JiraBean implements Serializable{
 		LocalDate actualUATdate = LocalDate.parse(actualUATdateStr, formatter);
 		LocalDate liveApprovalDate = LocalDate.parse(liveApprovalDateStr, formatter);
 		LocalDate releaseDate = LocalDate.parse(releaseDateStr, formatter);
+		LocalDate custInvoiceDate = LocalDate.parse(customerInvoiceDateStr, formatter);
 		
+		CustomerInvoice custInvoiceDate2 = new CustomerInvoice(custInvoiceDate);
 		
 		newJira.setCrFormDate(crFormDate);
 		newJira.setCreationDate(creationDate);
@@ -122,27 +122,29 @@ public class JiraBean implements Serializable{
 		newJira.setActualUatDate(actualUATdate);
 		newJira.setLiveApprovalDate(liveApprovalDate);
 		newJira.setReleaseDate(releaseDate);
+		newJira.setJiraInvoice(custInvoiceDate2);
+		
+		
 		newJira.setJiraNo(jira.getJiraNo());
 		newJira.setProjectManager(jira.getProjectManager());
 		newJira.setJiraTitle(jira.getJiraTitle());
-		newJira.setEffort((Double)jira.getEffort()); //Double casting'e izin veriyor mu bak
+		newJira.setEffort((Double)jira.getEffort()); //JSF'ten alınan eforu ekleyemiyorum
 		newJira.setJiraStatus(jira.getJiraStatus());
+		newJira.setInvoiceStatusJira(jira.getInvoiceStatusJira()); //persist ile bu şekilde çalıştı, JSF'ten null converter veriyor.
 		
-		
-//		for (Object cust : getSelectedCustomers()) {
-//			newJira.getJiraCustomers().add(cust);
-//			
-//		}
-//		
-		
+		/*
+		 * //aşağıdaki metodla cast hatası alıyorum 
+		 * for (Object cust : getSelectedCustomers()) {
+		 * Customer myCustTypeCust = (Customer)cust;
+		 * newJira.getJiraCustomers().add(myCustTypeCust);
+		 * }
+		 * 
+		 */
 		
 		jiraService.addJira(newJira); //add metoduna set metodları eklenecek customer ve product için
 		return "DONE! New jira details have been saved!";
-		
-				
+					
 	}
-
-
 	
 	public void deleteJira(int jiraId) {
 		jiraService.deleteJira(jiraId);
@@ -407,7 +409,47 @@ public class JiraBean implements Serializable{
 	public void setSelectProducts(List<Product> selectProducts) {
 		this.selectProducts = selectProducts;
 	}
-	
+
+
+
+	public String getCustomerInvoiceDateStr() {
+		return customerInvoiceDateStr;
+	}
+
+
+
+	public InvoiceStatusService getInvoiceService() {
+		return invoiceService;
+	}
+
+
+
+	public void setInvoiceService(InvoiceStatusService invoiceService) {
+		this.invoiceService = invoiceService;
+	}
+
+
+
+
+	public List<InvoiceStatus> getInvoiceStatusList() {
+		return invoiceStatusList;
+	}
+
+
+
+	public void setInvoiceStatusList(List<InvoiceStatus> invoiceStatusList) {
+		this.invoiceStatusList = invoiceStatusList;
+	}
+
+
+
+	public void setCustomerInvoiceDateStr(String customerInvoiceDateStr) {
+		this.customerInvoiceDateStr = customerInvoiceDateStr;
+	}
+
+
+
+
 
 	
 	

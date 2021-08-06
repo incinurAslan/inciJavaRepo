@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import changemng_entities.Credentials;
 import changemng_entities.Customer;
 import changemng_entities.CustomerInvoice;
+import changemng_entities.InvoiceStatus;
 import changemng_entities.Jira;
 import changemng_entities.Product;
 import changemng_entities.SupplierInvoice;
@@ -130,11 +131,12 @@ public class PersistTestClass {
 		
 		
 		LocalDate custInvoiceDate1 = LocalDate.of(2021, 7, 23);
-		CustomerInvoice customerInvoice1 = new CustomerInvoice("Fatura Kesildi", custInvoiceDate1);
+		CustomerInvoice customerInvoice1 = new CustomerInvoice(custInvoiceDate1);
+		//CustomerInvoice customerInvoice1 = new CustomerInvoice("Fatura Kesildi", custInvoiceDate1);
 		entityManager.persist(customerInvoice1);
 		
 		customerInvoice1.setInvoicedJira(jira1);
-	
+		
 		LocalDate createdDate2 = LocalDate.of(2021, 6, 10);
 		//Date createdDate2 = new Date(2021, 06, 10);
 		
@@ -142,6 +144,17 @@ public class PersistTestClass {
 		customer9.getCustomerJiras().add(jira2);
 		
 		
+		InvoiceStatus invoiceStatus1 = new InvoiceStatus("Fatura Kesildi");
+		InvoiceStatus invoiceStatus2 = new InvoiceStatus("Fatura Kesilecek");
+		InvoiceStatus invoiceStatus3 = new InvoiceStatus("Fatura Kesilmeyecek");
+		entityManager.persist(invoiceStatus1);
+		entityManager.persist(invoiceStatus2);
+		entityManager.persist(invoiceStatus3);
+		
+		jira1.setInvoiceStatusJira(invoiceStatus1);
+		jira2.setInvoiceStatusJira(invoiceStatus2);
+		
+	
 		LocalDate crFormDate2 = LocalDate.of(2021, 6, 11);
 		jira2.setCrFormDate(crFormDate2);
 	
@@ -169,14 +182,14 @@ public class PersistTestClass {
 		product1.getProductJiras().add(jira2);
 		
 		LocalDate custInvoiceDate2 = LocalDate.of(2021, 6, 23);
-		CustomerInvoice customerInvoice2 = new CustomerInvoice("Fatura Kesildi", custInvoiceDate2);
+		CustomerInvoice customerInvoice2 = new CustomerInvoice(custInvoiceDate2);
 		
 		customerInvoice2.setInvoicedJira(jira2);
 		entityManager.persist(customerInvoice2);
 		
 	
 		LocalDate suppInvoiceDate3 = LocalDate.of(2021, 6, 24);
-		SupplierInvoice suppInvoice3 = new SupplierInvoice("Fatura Kesilecek", suppInvoiceDate3);
+		SupplierInvoice suppInvoice3 = new SupplierInvoice(suppInvoiceDate3);
 		
 	
 		entityManager.persist(suppInvoice3);

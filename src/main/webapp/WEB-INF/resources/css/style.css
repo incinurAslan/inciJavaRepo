@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+.greenbuttonhover {
+  background-color: #FFFFE0; /* Green */
+  color: white;
+  width: ex;
+}
+
+.ui-button {
+	-moz-box-shadow:inset 0px 1px 0px 0px #c1ed9c !important;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #c1ed9c !important;
+	box-shadow:inset 0px 1px 0px 0px #c1ed9c !important;
+	background-color:#9dce2c !important;
+	-moz-border-radius:6px !important;
+	-webkit-border-radius:6px !important;
+	border-radius:6px !important;
+	border:1px solid #83c41a !important;
+	display:inline-block !important;
+	color:#ffffff !important;
+	font-family:Trebuchet MS !important;
+	font-size:15px !important;
+	font-weight:bold !important;
+	padding:10px 24px !important;
+	text-decoration:none !important;
+	text-shadow:1px 1px 0px #689324 !important;
+	
+}
