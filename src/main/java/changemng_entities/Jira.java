@@ -2,7 +2,9 @@ package changemng_entities;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -23,14 +25,9 @@ public class Jira {
 	private String jiraNo;
 	private String jiraTitle;
 	private String jiraStatus;
-	
 	private LocalDate creationDate;
-
-	
 	private String projectManager;
 	private double effort;
-	
-	
 	private LocalDate crFormDate;
 	private LocalDate effortApprovalDate;
 	private LocalDate plannedUatDate;
@@ -38,7 +35,7 @@ public class Jira {
 	private LocalDate liveApprovalDate;
 	private LocalDate releaseDate;
 	
-	@OneToOne(mappedBy = "invoicedJira" ,cascade = {CascadeType.ALL}) 
+	@OneToOne 
 	private CustomerInvoice jiraInvoice;
 	
 
@@ -46,13 +43,12 @@ public class Jira {
 	private SupplierInvoice supplierJiraInvoice;
 	
 	
-	@ManyToMany(mappedBy = "productJiras" ,cascade = {CascadeType.ALL})
-	
-	private List<Product> jiraProducts = new ArrayList<Product>();
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Set<Product> jiraProducts = new HashSet<Product>();
 	
 	//added lately
-	@ManyToMany(mappedBy = "customerJiras" ,cascade = {CascadeType.ALL}) 
-	private List<Customer> jiraCustomers = new ArrayList<Customer>();
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Set<Customer> jiraCustomers = new HashSet<Customer>();
 
 	
 	@OneToOne
@@ -219,12 +215,12 @@ public class Jira {
 	}
 
 	
-	public List<Product> getJiraProducts() {
+	public Set<Product> getJiraProducts() {
 		return jiraProducts;
 	}
 
 
-	public void setJiraProducts(List<Product> jiraProducts) {
+	public void setJiraProducts(Set<Product> jiraProducts) {
 		this.jiraProducts = jiraProducts;
 	}
 
@@ -239,18 +235,14 @@ public class Jira {
 	}
 
 
-	public List<Customer> getJiraCustomers() {
+	public Set<Customer> getJiraCustomers() {
 		return jiraCustomers;
 	}
 
 
-	public void setJiraCustomers(List<Customer> jiraCustomers) {
+	public void setJiraCustomers(Set<Customer> jiraCustomers) {
 		this.jiraCustomers = jiraCustomers;
 	}
-
-	
-	
-	
 
 
 	public InvoiceStatus getInvoiceStatusJira() {

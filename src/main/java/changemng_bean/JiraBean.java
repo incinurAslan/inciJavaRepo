@@ -4,18 +4,22 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
 
 import changemng_entities.Customer;
 import changemng_entities.CustomerInvoice;
 import changemng_entities.InvoiceStatus;
 import changemng_entities.Jira;
 import changemng_entities.Product;
+import changemng_services.CustomerInvoiceService;
 import changemng_services.CustomerService;
 import changemng_services.InvoiceStatusService;
 import changemng_services.JiraService;
@@ -25,7 +29,7 @@ import changemng_services.ProductService;
 @SessionScoped
 public class JiraBean implements Serializable{
 	
-
+	
 	@Inject
 	private JiraService jiraService;
 	
@@ -37,6 +41,10 @@ public class JiraBean implements Serializable{
 	
 	@Inject
 	private InvoiceStatusService invoiceService;
+	
+	
+	@Inject
+	private CustomerInvoiceService customerInvoiceService;
 	
 	
 	private Jira jira;
@@ -61,18 +69,21 @@ public class JiraBean implements Serializable{
 	private List<Customer> customers;
 	private List<Product> products;
 	
-	private List<Object> selectedCustomers;
+	private List<Integer> selectedCustomers;
 	private List<Customer> selectCustomers;
 	
 
-	private List<Object> selectedProducts;
+	private List<Integer> selectedProducts;
 	private List<Product> selectProducts;
 	
-	//private InvoiceStatus selectedInvoiceStatus;
+	private InvoiceStatus selectedInvoiceStatus;
+	private int selectedInvStNo;
 	
-	//private InvoiceStatus selectedInvoiceStatus;
+	//private String selectedInvoiceStatusStr;
+	
 	private List<InvoiceStatus> invoiceStatusList;
 	
+	//private List<Customer> customersByJiraId;
 	
 	
 	@PostConstruct
@@ -83,66 +94,90 @@ public class JiraBean implements Serializable{
 		this.selectedJira = new Jira();
 		this.newJira = new Jira();
 		
-	//	this.selectedInvoiceStatus = new InvoiceStatus();
+		//this.selectedInvoiceStatus = new InvoiceStatus();
+		
 		invoiceStatusList = invoiceService.getAllInvoiceStatus();
 	
-		selectedCustomers = new ArrayList<Object>();
-		selectedProducts = new ArrayList<Object>();
+		selectedCustomers = new ArrayList<Integer>();
+		selectedProducts = new ArrayList<Integer>();
 				
 		this.customers = customerService.getAllCustomers();
 		selectCustomers = customerService.getAllCustomers();
 		
 		this.products = productService.getAllProducts();
 		selectProducts = productService.getAllProducts();
-
+		
+		//customersByJiraId = customerService.getAllCustomersByJiraNr(selectedJira.getJiraNr());
+		
 	}
-
-
 	
 	public String saveNewJira() {
 		
-		//formatter
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		//convert String to LocalDate
-		LocalDate creationDate = LocalDate.parse(creationDateStr, formatter);
-		LocalDate crFormDate = LocalDate.parse(crFormDateStr, formatter);
-		LocalDate approvalDate = LocalDate.parse(effortApprovalDateStr, formatter);
-		LocalDate plannedUATDate = LocalDate.parse(plannedUATdateStr, formatter);
-		LocalDate actualUATdate = LocalDate.parse(actualUATdateStr, formatter);
-		LocalDate liveApprovalDate = LocalDate.parse(liveApprovalDateStr, formatter);
-		LocalDate releaseDate = LocalDate.parse(releaseDateStr, formatter);
-		LocalDate custInvoiceDate = LocalDate.parse(customerInvoiceDateStr, formatter);
+		  //formatter 
 		
-		CustomerInvoice custInvoiceDate2 = new CustomerInvoice(custInvoiceDate);
+		  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); //convert String to LocalDate
+		  LocalDate creationDate = LocalDate.parse(creationDateStr, formatter);
+		  LocalDate crFormDate = LocalDate.parse(crFormDateStr, formatter); 
+		  LocalDate approvalDate = LocalDate.parse(effortApprovalDateStr, formatter); 
+		  LocalDate plannedUATDate = LocalDate.parse(plannedUATdateStr, formatter); 
+		  LocalDate actualUATdate = LocalDate.parse(actualUATdateStr, formatter); 
+		  LocalDate liveApprovalDate = LocalDate.parse(liveApprovalDateStr, formatter); 
+		  LocalDate releaseDate = LocalDate.parse(releaseDateStr, formatter); 
+		  
+		  //ayrı bir entity olan CustomerInvoice'taki InvoiceDate bilgisini JSF'ten aldıktan sonra db'ye yazma adımların:
+		  LocalDate custInvoiceDate = LocalDate.parse(customerInvoiceDateStr, formatter);
+		  CustomerInvoice custInvoiceDate2 = new CustomerInvoice(custInvoiceDate); //local date'ten CustomerInvoice'e convert et
+		  customerInvoiceService.addCustomerInvoice(custInvoiceDate2); //customer invoice'i persist et db'ye
+		  newJira.setJiraInvoice(custInvoiceDate2); //onetoone ilişkisi set et
+		  custInvoiceDate2.setInvoicedJira(newJira); //onetoone ilişkisi set et
+			 
+		  newJira.setCrFormDate(crFormDate); 
+		  newJira.setCreationDate(creationDate);
+		  newJira.setEffortApprovalDate(approvalDate);
+		  newJira.setPlannedUatDate(plannedUATDate);
+		  newJira.setActualUatDate(actualUATdate);
+		  newJira.setLiveApprovalDate(liveApprovalDate);
+		  newJira.setReleaseDate(releaseDate);
+		  
+		  newJira.setJiraNo(jira.getJiraNo());
+		  newJira.setProjectManager(jira.getProjectManager());
+		  newJira.setJiraTitle(jira.getJiraTitle());
+		  newJira.setEffort(jira.getEffort()); //JSF'ten kullanıcıya girdirdiğin eforu db'ye yazmıyor, hepsi 0.0 görünüyor db'de, geri dön.
+		  newJira.setJiraStatus(jira.getJiraStatus());
+	
+		//set selected customers on listbox by the user
+		Set<Customer> custs = new HashSet<Customer>();
 		
-		newJira.setCrFormDate(crFormDate);
-		newJira.setCreationDate(creationDate);
-		newJira.setEffortApprovalDate(approvalDate);
-		newJira.setPlannedUatDate(plannedUATDate);
-		newJira.setActualUatDate(actualUATdate);
-		newJira.setLiveApprovalDate(liveApprovalDate);
-		newJira.setReleaseDate(releaseDate);
-		newJira.setJiraInvoice(custInvoiceDate2);
+		for (int selCust : selectedCustomers) {
+			Customer c = new Customer();
+			c.setCustomerNo(selCust);
+			custs.add(c);
+		}	
+		newJira.setJiraCustomers(custs);
 		
+		//set selected products on checkbox by the user
+		Set<Product> prods = new HashSet<Product>();
+		for (int selProd : selectedProducts) {
+			Product p = new Product();
+			p.setProductNo(selProd);
+			prods.add(p);
+		}	
+		newJira.setJiraProducts(prods);
+	
+		selectedInvStNo = jira.getInvoiceStatusJira().getInvoiceStatusNo(); //statüyü invoiceStatusNo ile alıyor JSF'te
+		InvoiceStatus newInvoiceSt = new InvoiceStatus();
+		newInvoiceSt.setInvoiceStatusNo(selectedInvStNo);
+		newJira.setInvoiceStatusJira(newInvoiceSt);
+		newInvoiceSt.setJiraInvoiceStatus(newJira);
 		
-		newJira.setJiraNo(jira.getJiraNo());
-		newJira.setProjectManager(jira.getProjectManager());
-		newJira.setJiraTitle(jira.getJiraTitle());
-		newJira.setEffort((Double)jira.getEffort()); //JSF'ten alınan eforu ekleyemiyorum
-		newJira.setJiraStatus(jira.getJiraStatus());
-		newJira.setInvoiceStatusJira(jira.getInvoiceStatusJira()); //persist ile bu şekilde çalıştı, JSF'ten null converter veriyor.
-		
-		/*
-		 * //aşağıdaki metodla cast hatası alıyorum 
-		 * for (Object cust : getSelectedCustomers()) {
-		 * Customer myCustTypeCust = (Customer)cust;
-		 * newJira.getJiraCustomers().add(myCustTypeCust);
-		 * }
-		 * 
-		 */
+		// Yukarıdaki gibi JSF'ten SelectOneMenu'den fatura durumu için seçim yapılınca 1-2-3 fatura nolu statüye göre aşağıdaki hatayı alıyorum:
+		// invoiceStatusNo[severity=(ERROR 2), summary=(Conversion Error setting value '2' for 'null Converter'.), detail=(Conversion Error setting value '2' for 'null Converter'.)]
+		// invoiceStatusNo[severity=(ERROR 3), summary=(Conversion Error setting value '3' for 'null Converter'.), detail=(Conversion Error setting value '3' for 'null Converter'.)]
 		
 		jiraService.addJira(newJira); //add metoduna set metodları eklenecek customer ve product için
-		return "DONE! New jira details have been saved!";
+		return "getAllJiras";
+				
+				//"DONE! New jira details have been saved!";
 					
 	}
 	
@@ -370,15 +405,19 @@ public class JiraBean implements Serializable{
 		this.products = products;
 	}
 
+	
 
-	public List<Object> getSelectedCustomers() {
+
+	public List<Integer> getSelectedCustomers() {
 		return selectedCustomers;
 	}
 
 
-	public void setSelectedCustomers(List<Object> selectedCustomers) {
+
+	public void setSelectedCustomers(List<Integer> selectedCustomers) {
 		this.selectedCustomers = selectedCustomers;
 	}
+
 
 
 	public List<Customer> getSelectCustomers() {
@@ -391,12 +430,12 @@ public class JiraBean implements Serializable{
 	}
 
 
-	public List<Object> getSelectedProducts() {
+	public List<Integer> getSelectedProducts() {
 		return selectedProducts;
 	}
 
 
-	public void setSelectedProducts(List<Object> selectedProducts) {
+	public void setSelectedProducts(List<Integer> selectedProducts) {
 		this.selectedProducts = selectedProducts;
 	}
 
@@ -412,10 +451,13 @@ public class JiraBean implements Serializable{
 
 
 
-	public String getCustomerInvoiceDateStr() {
-		return customerInvoiceDateStr;
-	}
-
+	
+	  public String getCustomerInvoiceDateStr() { 
+		  
+		  return customerInvoiceDateStr; 
+		  
+	  }
+	 
 
 
 	public InvoiceStatusService getInvoiceService() {
@@ -429,33 +471,63 @@ public class JiraBean implements Serializable{
 	}
 
 
+	public void setCustomerInvoiceDateStr(String customerInvoiceDateStr) {
+		  this.customerInvoiceDateStr = customerInvoiceDateStr; 
+	  }
+	 
 
+
+
+	public InvoiceStatus getSelectedInvoiceStatus() {
+		return selectedInvoiceStatus;
+	}
+
+
+
+	public void setSelectedInvoiceStatus(InvoiceStatus selectedInvoiceStatus) {
+		this.selectedInvoiceStatus = selectedInvoiceStatus;
+	}
+
+	public CustomerInvoiceService getCustomerInvoiceService() {
+		return customerInvoiceService;
+	}
+
+	public void setCustomerInvoiceService(CustomerInvoiceService customerInvoiceService) {
+		this.customerInvoiceService = customerInvoiceService;
+	}
+
+	public int getSelectedInvStNo() {
+		return selectedInvStNo;
+	}
+
+	public void setSelectedInvStNo(int selectedInvStNo) {
+		this.selectedInvStNo = selectedInvStNo;
+	}
 
 	public List<InvoiceStatus> getInvoiceStatusList() {
 		return invoiceStatusList;
 	}
 
-
-
 	public void setInvoiceStatusList(List<InvoiceStatus> invoiceStatusList) {
 		this.invoiceStatusList = invoiceStatusList;
 	}
 
-
-
-	public void setCustomerInvoiceDateStr(String customerInvoiceDateStr) {
-		this.customerInvoiceDateStr = customerInvoiceDateStr;
-	}
-
-
-
-
-
 	
 	
 	
-	
-	
+
+	/*
+	 * public String getSelectedInvoiceStatusStr() { return
+	 * selectedInvoiceStatusStr; }
+	 * 
+	 * 
+	 * 
+	 * public void setSelectedInvoiceStatusStr(String selectedInvoiceStatusStr) {
+	 * this.selectedInvoiceStatusStr = selectedInvoiceStatusStr; }
+	 * 
+	 */
+
+
 }
 
 

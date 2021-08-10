@@ -23,8 +23,6 @@ public class InvoiceStatusService {
 	}
 	
 	
-	
-	
-	
+	//add metodu olmayacak şimdilik, fatura statüleri sabit
 	
 }

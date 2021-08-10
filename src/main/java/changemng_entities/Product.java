@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,12 +20,13 @@ public class Product {
 	private int productNo;
 	private String productName;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy = "jiraProducts" ,cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
 	private List<Jira> productJiras = new ArrayList<Jira>();
 		
 
-	@ManyToMany(mappedBy = "customerProducts", cascade = {CascadeType.REMOVE,CascadeType.PERSIST})
-	private List<Customer> productCustomers = new ArrayList<Customer>();
+	//@ManyToMany(mappedBy = "customerProducts", cascade = {CascadeType.REMOVE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+	
+//	private List<Customer> productCustomers = new ArrayList<Customer>();
 	
 	
 	public Product() {
@@ -68,14 +70,13 @@ public class Product {
 	}
 
 
-	public List<Customer> getProductCustomers() {
-		return productCustomers;
-	}
-
-
-	public void setProductCustomers(List<Customer> productCustomers) {
-		this.productCustomers = productCustomers;
-	}
+	/*
+	 * public List<Customer> getProductCustomers() { return productCustomers; }
+	 * 
+	 * 
+	 * public void setProductCustomers(List<Customer> productCustomers) {
+	 * this.productCustomers = productCustomers; }
+	 */
 
 
 	@Override

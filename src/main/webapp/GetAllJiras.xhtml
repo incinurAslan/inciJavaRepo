@@ -9,7 +9,7 @@
 
 <h2 style="border-bottom-style: double;">All CR Records</h2>
 <table cellpadding="2" cellspacing="2" border="2">
-<tr>
+<tr style="background-color: black; color:white; text-align: left;">
 <th>JiraNo</th>
 <th>JiraCustomer</th>
 <th>Title</th>
@@ -23,13 +23,19 @@
 <th>ActualUatDate</th>
 <th>LiveApprovalDate</th>
 <th>Release Date</th>
+<th>Update</th>
 
 </tr>
+
 <h:form>
 	<ui:repeat var="jira" value="#{jiraBean.jiras}">
-		<tr>
+		<tr style="background-color:threedlightshadow;">
 		<td>#{jira.jiraNo}</td>
-		<td>#{jiraBean.jira.jiraCustomers}</td>
+		<td>
+			<ui:repeat var="jcustomer" value="#{jira.jiraCustomers}">
+				#{jcustomer.customerName}
+			</ui:repeat>
+		</td>
 		<td>#{jira.jiraTitle}</td>
 		<td>#{jira.jiraStatus}</td>
 		<td>#{jira.projectManager}</td>

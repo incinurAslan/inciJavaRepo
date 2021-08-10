@@ -18,12 +18,6 @@ public class JiraService {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	private Customer customer;
-	private Product product;
-	
-	private CustomerInvoice customerInvoice;
-	private SupplierInvoice suuplierInvoice;
-	
 
 	public List<Jira> getAllJiras()
 	{

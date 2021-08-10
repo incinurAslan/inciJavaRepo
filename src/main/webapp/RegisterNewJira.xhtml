@@ -6,7 +6,7 @@
 
 <h:head>
 
- <h:outputStylesheet library="css" name="style.css"/>
+ <!-- <h:outputStylesheet library="css" name="style.css"/> -->
 
 </h:head> 
 <body> 
@@ -31,34 +31,34 @@
 		 				  itemLabel="Incinur Aslan"/>
 		 	<f:selectItem itemValue="DemetYel"
 		 				  itemLabel="Demet Yel"/>		    
-		 	<f:selectItem itemValue="SerkanYazıcı"
-		 				  itemLabel="Serkan Yazıcı"/>	
-		 	<f:selectItem itemValue="SimayCicek"
-		 				  itemLabel="Simay Çiçek"/>		  
+		 	<f:selectItem itemValue="SerkanLisan"
+		 				  itemLabel="Serkan Lisan"/>	
+		 	<f:selectItem itemValue="SimayKarahan"
+		 				  itemLabel="Simay Karahan"/>		  
 		 </h:selectOneMenu>
 		 <h:message for="pm"/>
 
 		 <h:outputLabel value="Jira Status"  for="jst" />
 		 <h:selectOneMenu
 		 	value="#{jiraBean.jira.jiraStatus}" style="background-color:#FFFFE0">
-		 	<f:selectItem itemValue="AnalizBek"
-		 				  itemLabel="AnalizBek"/>
-		 	<f:selectItem itemValue="EforOnayıBek"
-		 				  itemLabel="EforOnayıBek"/>		    
-		 	<f:selectItem itemValue="GelistirmeBek"
-		 				  itemLabel="GelistirmeBek"/>	
-		 	<f:selectItem itemValue="TestDeployBek"
-		 				  itemLabel="TestDeployBek"/>
-		 	<f:selectItem itemValue="TestBek"
-		 				  itemLabel="TestBek"/>	
-		 	<f:selectItem itemValue="CanlıOnayBek"
-		 				  itemLabel="CanlıOnayBek"/>			  	  	  
-		 	<f:selectItem itemValue="CanlıDepBek"
-		 				  itemLabel="CanlıDepBek"/>		
-		 	<f:selectItem itemValue="Canlida"
-		 				  itemLabel="Canlida"/>	
-		 	<f:selectItem itemValue="Kapandı"
-		 				  itemLabel="Kapandı"/>				  	  		 		  
+		 	<f:selectItem itemValue="InAnalysis"
+		 				  itemLabel="InAnalysis"/>
+		 	<f:selectItem itemValue="WaitingEffortApproval"
+		 				  itemLabel="WaitingEffortApproval"/>		    
+		 	<f:selectItem itemValue="InDevelopment"
+		 				  itemLabel="InDevelopment"/>	
+		 	<f:selectItem itemValue="WaitingTestDeploy"
+		 				  itemLabel="WaitingTestDeploy"/>
+		 	<f:selectItem itemValue="InTest"
+		 				  itemLabel="InTest"/>	
+		 	<f:selectItem itemValue="WaitingLiveApproval"
+		 				  itemLabel="WaitingLiveApproval"/>			  	  	  
+		 	<f:selectItem itemValue="WaitingRelease"
+		 				  itemLabel="WaitingRelease"/>		
+		 	<f:selectItem itemValue="Released"
+		 				  itemLabel="Released"/>	
+		 	<f:selectItem itemValue="Closed"
+		 				  itemLabel="Closed"/>				  	  		 		  
 		 </h:selectOneMenu>
 		 <h:message for="jst"/>
 		 
@@ -66,14 +66,14 @@
 		 <h:outputLabel value="Jira Customer" for="jcs" />
 		<h:selectManyListbox 
 			value="#{jiraBean.selectedCustomers}"  style="background-color:#FFFFE0" id= "jcs" required="true" layout="pageDirection" 
-			title="Bir veya birden fazla müşteri adı seçiniz." size="5">
+			title="Bir veya birden fazla müşteri adı seçiniz." size="8">
 	    	<f:selectItems value="#{jiraBean.selectCustomers}" var="customerItem" 
 	    	itemLabel="#{customerItem.customerName}"
 	    	itemValue="#{customerItem.customerNo}"/>
 		</h:selectManyListbox>
 		<h:message for="jcs"/>
 		 
-		 
+	 
 		<h:outputLabel value="Jira Products" id="jprd" for="jprd" />
 		<h:selectManyCheckbox 
 			value="#{jiraBean.selectedProducts}" required="true" layout="pageDirection"  
@@ -83,8 +83,7 @@
 	    	itemValue="#{productItem.productNo}" />
 		</h:selectManyCheckbox>
 		<h:message for="jprd"/>
-				
-		 
+					 
 		 <h:outputLabel value="Creation Date" for="jcd" />
 		 <h:inputText value="#{jiraBean.creationDateStr}" id="jcd" required="true" requiredMessage="*" style="background-color:#FFFFE0" />
 		 <h:message for="jcd"/>
@@ -121,22 +120,23 @@
 		 <h:inputText value="#{jiraBean.releaseDateStr}" id="jrd" required="false" style="background-color:#FFFFE0" />
 		 <h:message for="jrd"/>
 	
+	 	<h:outputLabel value="CustomerInvoiceDate" for="cidt" />
+		 <h:inputText value="#{jiraBean.customerInvoiceDateStr}" id="cidt" required="false" style="background-color:#FFFFE0" />
+		 <h:message for="cidt"/>
+	
 	 	<h:outputLabel value="Customer Invoice Status" for="cist" />
-		<h:selectOneMenu id="invoiceStatusNo"  value="#{jiraBean.jira.invoiceStatusJira}"  style="background-color:#FFFFE0">
+		<h:selectOneMenu id="invoiceStatusNo"  value="#{jiraBean.jira.invoiceStatusJira}" style="background-color:#FFFFE0">
 			<f:selectItems value="#{jiraBean.invoiceStatusList}" var="invoice" 
 		    	itemLabel="#{invoice.invoiceName}"
 		    	itemValue="#{invoice.invoiceStatusNo}"/>
 		</h:selectOneMenu>
 		<h:message for="cist"/>
 		 
-		 
-		 <h:outputLabel value="CustomerInvoiceDate" for="cidt" />
-		 <h:inputText value="#{jiraBean.customerInvoiceDateStr}" id="cidt" required="false" style="background-color:#FFFFE0" />
-		 <h:message for="cidt"/>
-	
-
+		
+	 
 		<h:outputText />
-		<h:commandButton action="#{jiraBean.saveNewJira()}" value="Save Jira" styleClass="ui.button" />
+		<h:commandButton action="#{jiraBean.saveNewJira()}" value="Save Jira" />
+		<!-- styleClass="ui.button" --> 
 		<h:outputText />
 
 	</h:panelGrid>

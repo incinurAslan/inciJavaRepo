@@ -44,7 +44,7 @@ public class CustomerBean implements Serializable{
 	
 	public String saveNewCustomer() {
 		
-		customerService.addCustomer(customer, product);
+		customerService.addCustomer(customer);
 		return null;
 				
 	}

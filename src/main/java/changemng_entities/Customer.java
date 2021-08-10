@@ -14,7 +14,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-
 @Entity
 public class Customer {
 	
@@ -26,11 +25,12 @@ public class Customer {
 	private double mandayRate;
 	
 
-	@ManyToMany
-	private List<Product> customerProducts = new ArrayList<Product>();
+	/*
+	 * @ManyToMany private List<Product> customerProducts = new
+	 * ArrayList<Product>();
+	 */
 	
-	
-	@ManyToMany
+	@ManyToMany(mappedBy = "jiraCustomers" ,cascade = {CascadeType.ALL}, fetch = FetchType.EAGER) 
 	private List<Jira> customerJiras = new ArrayList<Jira>();
 		
 
@@ -79,17 +79,15 @@ public class Customer {
 	public void setMandayRate(double mandayRate) {
 		this.mandayRate = mandayRate;
 	}
-	
-	
-	public List<Product> getCustomerProducts() {
-		return customerProducts;
-	}
 
-
-	public void setCustomerProducts(List<Product> customerProducts) {
-		this.customerProducts = customerProducts;
-	}
-
+	/*
+	 * 
+	 * public List<Product> getCustomerProducts() { return customerProducts; }
+	 * 
+	 * 
+	 * public void setCustomerProducts(List<Product> customerProducts) {
+	 * this.customerProducts = customerProducts; }
+	 */
 	public List<Jira> getCustomerJiras() {
 		return customerJiras;
 	}

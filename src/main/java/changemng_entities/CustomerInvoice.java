@@ -24,7 +24,8 @@ public class CustomerInvoice {
 		super();
 	}
 	
-	@OneToOne
+	
+	@OneToOne(mappedBy = "jiraInvoice", cascade = {CascadeType.ALL})
 	private Jira invoicedJira;
 
 
@@ -65,8 +66,6 @@ public class CustomerInvoice {
 		this.invoicedJira = invoicedJira;
 	}
 
-	
-	
 
 	@Override
 	public String toString() {

@@ -26,15 +26,15 @@ public class PersistTestClass {
 	public void callSampleDate() {
 		
 		
-		Customer customer1 = new Customer("Ziraat Sigorta", 2.225);
-		Customer customer2 = new Customer("Sompo Sigorta", 2.215);
-		Customer customer3 = new Customer("Ankara Sigorta", 1.195);
-		Customer customer4 = new Customer("Fortis Sandık", 1.918);
-		Customer customer5 = new Customer("Halk Sigorta", 1.918);
-		Customer customer6 = new Customer("Zurich Sigorta", 2.075);
-		Customer customer7 = new Customer("Eureko Sigorta", 2.165);
-		Customer customer8 = new Customer("Allianz Sigorta", 2.315);
-		Customer customer9 = new Customer("Groupama Sigorta", 2.115);
+		Customer customer1 = new Customer("Ziraat Insurance", 2.225);
+		Customer customer2 = new Customer("Sompo Insurance", 2.215);
+		Customer customer3 = new Customer("Ankara Insurance", 1.195);
+		Customer customer4 = new Customer("Fortis Bank Fund", 1.918);
+		Customer customer5 = new Customer("Halk Insurance", 1.918);
+		Customer customer6 = new Customer("Zurich Insurance", 2.075);
+		Customer customer7 = new Customer("Eureko Insurance", 2.165);
+		Customer customer8 = new Customer("Allianz Insurance", 2.315);
+		Customer customer9 = new Customer("Groupama Insurance", 2.115);
 		
 		
 		entityManager.persist(customer1);
@@ -50,7 +50,7 @@ public class PersistTestClass {
 		Product product1 = new Product("Claimer");
 		Product product2 = new Product("Mediclaim");
 		Product product3 = new Product("Octopus");
-		Product product4 = new Product("TSS Ulak");
+		Product product4 = new Product("TSS Ulaks");
 		Product product5 = new Product("Chatbot");
 		Product product6 = new Product("Albert Web");
 		
@@ -62,46 +62,17 @@ public class PersistTestClass {
 		entityManager.persist(product6);
 
 		
-		customer1.getCustomerProducts().add(product2);
-		customer1.getCustomerProducts().add(product3);
-		
-		customer2.getCustomerProducts().add(product2);
-		customer2.getCustomerProducts().add(product3);
-		
-		customer3.getCustomerProducts().add(product2);
-		customer3.getCustomerProducts().add(product3);
-		
-		customer4.getCustomerProducts().add(product2);
-		customer4.getCustomerProducts().add(product3);
-		
-		
-		customer5.getCustomerProducts().add(product2);
-		customer5.getCustomerProducts().add(product3);
-		
-		customer6.getCustomerProducts().add(product2);
-		customer6.getCustomerProducts().add(product3);
-		
-		customer7.getCustomerProducts().add(product1);
-		customer7.getCustomerProducts().add(product3);
-		
-		customer8.getCustomerProducts().add(product1);
-		customer8.getCustomerProducts().add(product3);
-		customer8.getCustomerProducts().add(product4);
-		customer8.getCustomerProducts().add(product5);
-		
-		customer9.getCustomerProducts().add(product1);
-		customer9.getCustomerProducts().add(product3);
-		customer9.getCustomerProducts().add(product4);
-		customer9.getCustomerProducts().add(product5);
-		
 		
 		LocalDate createdDate1 = LocalDate.of(2021, 07, 10);
 		
 		//Date createdDate1 = new Date(2021, 07, 10);
 		
 		
-		Jira jira1 = new Jira("AZ110", "Ulak Tarih Bazlı Tevkifat Tutar Yapısı", "GelistirmeBek", createdDate1, "Incinur Aslan");
-		customer8.getCustomerJiras().add(jira1);
+		Jira jira1 = new Jira("AZ110", "Ulak Tarih Bazlı Tevkifat Tutar Yapısı", "WaitingEffortApproval", createdDate1, "Incinur Aslan");
+		
+		jira1.getJiraCustomers().add(customer8);
+		jira1.getJiraCustomers().add(customer7);
+		
 		
 		LocalDate crFormDate1 = LocalDate.of(2021, 7, 11);
 		jira1.setCrFormDate(crFormDate1);
@@ -135,18 +106,19 @@ public class PersistTestClass {
 		//CustomerInvoice customerInvoice1 = new CustomerInvoice("Fatura Kesildi", custInvoiceDate1);
 		entityManager.persist(customerInvoice1);
 		
-		customerInvoice1.setInvoicedJira(jira1);
+		jira1.setJiraInvoice(customerInvoice1);
+		//customerInvoice1.setInvoicedJira(jira1);
 		
 		LocalDate createdDate2 = LocalDate.of(2021, 6, 10);
 		//Date createdDate2 = new Date(2021, 06, 10);
 		
-		Jira jira2 = new Jira("GR120", "Claimer Tarih Bazlı Tevkifat Tutar Yapısı", "GelistirmeBek", createdDate2, "Serkan Yazıcı");
-		customer9.getCustomerJiras().add(jira2);
+		Jira jira2 = new Jira("GR120", "Claimer Tarih Bazlı Tevkifat Tutar Yapısı", "InAnalysis", createdDate2, "Serkan Yazıcı");
+		jira2.getJiraCustomers().add(customer9);
 		
+		InvoiceStatus invoiceStatus1 = new InvoiceStatus("Invoiced");
+		InvoiceStatus invoiceStatus2 = new InvoiceStatus("To be invoiced");
+		InvoiceStatus invoiceStatus3 = new InvoiceStatus("Not to be invoiced");
 		
-		InvoiceStatus invoiceStatus1 = new InvoiceStatus("Fatura Kesildi");
-		InvoiceStatus invoiceStatus2 = new InvoiceStatus("Fatura Kesilecek");
-		InvoiceStatus invoiceStatus3 = new InvoiceStatus("Fatura Kesilmeyecek");
 		entityManager.persist(invoiceStatus1);
 		entityManager.persist(invoiceStatus2);
 		entityManager.persist(invoiceStatus3);
@@ -178,13 +150,18 @@ public class PersistTestClass {
 		
 		entityManager.persist(jira2);
 		
-		product4.getProductJiras().add(jira2);
-		product1.getProductJiras().add(jira2);
+		
+		jira2.getJiraProducts().add(product4);
+		jira2.getJiraProducts().add(product1);
+		
+		//product4.getProductJiras().add(jira2);
+		//product1.getProductJiras().add(jira2);
 		
 		LocalDate custInvoiceDate2 = LocalDate.of(2021, 6, 23);
 		CustomerInvoice customerInvoice2 = new CustomerInvoice(custInvoiceDate2);
 		
-		customerInvoice2.setInvoicedJira(jira2);
+		jira2.setJiraInvoice(customerInvoice2);
+		//customerInvoice2.setInvoicedJira(jira2);
 		entityManager.persist(customerInvoice2);
 		
 	

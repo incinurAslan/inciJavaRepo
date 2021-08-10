@@ -15,23 +15,26 @@ public class CustomerService {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
-	private Product product;
-	
-	
+
 	public List<Customer> getAllCustomers()
 	{
 		return entityManager.createQuery("select c from Customer c", Customer.class).getResultList();
 	}
 	
 	
-	public void addCustomer(Customer customer, Product product)
+	/*
+	 * public List<Customer> getAllCustomersByJiraNr(int jiraId){ return
+	 * entityManager.
+	 * createQuery("select c from Customer c where customerJiras_jiraNr = jiraId",
+	 * Customer.class).getResultList(); }
+	 */
+	
+	
+	public void addCustomer(Customer customer)
 	{
-		entityManager.persist(product);
-		//entityManager.merge(product);
+
 		entityManager.persist(customer);
-		customer.getCustomerProducts().add(product);
-		//Yeni ürün eklenebiliyor müşteri için ancak varolan ürünlerden seçim yapılmıyor. 
-		//selectOne ile varolan ürünlerden seçtir...
+
 	}
 	
 	
@@ -43,16 +46,7 @@ public class CustomerService {
 	}
 
 
-	public Product getProduct() {
-		return product;
-	}
 
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-	
-	
 	
 	
 	
