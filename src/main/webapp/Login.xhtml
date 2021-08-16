@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+
+	<h2 style="border-bottom-style: double; align-content: center; align-items: center; align-self: center;">Please Enter Your Credentials Below </h2>
+	<h:form>
+	
+		<table border="2"  cellpadding="2" cellspacing="2" align="center">
+				<tr>
+					<td>Username</td><td><h:inputText value="#{loginBean.username}" style="background-color:#FFFFE0"/></td>
+				</tr>
+				<tr>
+					<td>Password</td><td><h:inputSecret value="#{loginBean.password}" style="background-color:#FFFFE0" /></td>
+				</tr>
+				<tr>	
+					<td></td><td><h:commandButton action="#{loginBean.login()}" value="Login" /></td>
+				</tr>			
+		</table>
+		
+		<h2 align="center" style="color:gray; font-size: medium; font-style: italic;" > <h:messages showDetail="true"/></h2>
+		
+	</h:form>
+
+</body> 
+</html>

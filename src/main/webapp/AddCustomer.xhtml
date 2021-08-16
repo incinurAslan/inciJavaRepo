@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+
+
+
+<h3 style="border-bottom-style: double;">Add New Customer</h3>
+
+<h:form>
+
+	<h:panelGrid columns="3">
+		 <h:outputLabel value="Customer Name" for="cn" />
+		 <h:inputText value="#{customerBean.customer.customerName}" style="background-color:#FFFFE0" id="cn" required="true" requiredMessage="*"/>
+		 <h:message for="cn"/>
+		
+		 <h:outputLabel value="Customer ManDay Rate" for="cmd" />
+		 <h:inputText value="#{customerBean.customer.mandayRate}" converterId="javax.faces.Double"  style="background-color:#FFFFE0" id="cmd" required="true" requiredMessage="*"/>
+		 <h:message for="cmd"/>
+
+		<h:outputText />
+		<h:commandButton action="#{customerBean.saveNewCustomer()}" value="Save Customer" />
+		<h:outputText />
+
+	</h:panelGrid>
+	
+ </h:form>
+
+</body> 
+</html>

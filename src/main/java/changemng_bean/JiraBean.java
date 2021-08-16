@@ -10,6 +10,7 @@ import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.component.html.HtmlInputText;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -32,8 +33,6 @@ import changemng_services.SupplierInvoiceStatusService;
 @Named
 @SessionScoped
 public class JiraBean implements Serializable{
-	
-	//dotforgit
 	
 	@Inject
 	private JiraService jiraService;
@@ -94,8 +93,18 @@ public class JiraBean implements Serializable{
 	private List<SupplierInvoiceStatus> supplierInvoiceStatusList;
 
 	
+	 private HtmlInputText inputDateComponent = new HtmlInputText();
+   
+     private HtmlInputText inputCsDateComponent = new HtmlInputText();
+     
+     private String invalidDate = "1111-11-11"; //default value to insert if no invoice will be made out
+     
+	
 	@PostConstruct
 	public void init() {
+		
+		inputDateComponent.setValue(invalidDate);
+		inputCsDateComponent.setValue(invalidDate);
 		
 		this.jiras = jiraService.getAllJiras();
 		this.jira = new Jira();
@@ -115,9 +124,9 @@ public class JiraBean implements Serializable{
 		
 		this.products = productService.getAllProducts();
 		selectProducts = productService.getAllProducts();
-		
-		
+
 	}
+	
 	
 	public String saveNewJira() {
 		
@@ -157,7 +166,7 @@ public class JiraBean implements Serializable{
 		  newJira.setJiraNo(jira.getJiraNo());
 		  newJira.setProjectManager(jira.getProjectManager());
 		  newJira.setJiraTitle(jira.getJiraTitle());
-		  newJira.setEffort(selectedJira.getEffort()); //JSF'ten kullanıcıya girdirdiğin eforu db'ye yazmıyor, hepsi 0.0 görünüyor db'de, geri dön.
+		  newJira.setEffort(selectedJira.getEffort()); 
 		  newJira.setJiraStatus(jira.getJiraStatus());
 		  
 	
@@ -207,18 +216,16 @@ public class JiraBean implements Serializable{
 		  
 		  
 		  
-		jiraService.addJira(newJira); //add metoduna set metodları eklenecek customer ve product için
-		return "getAllJiras";
-				
-				//"DONE! New jira details have been saved!";
-				//git
-					
+		jiraService.addJira(newJira); 
+		init();
+		return "GetAllJiras";
+
 	}
 	
-	public void deleteJira(int jiraId) {
+	public String deleteJira(int jiraId) {
 		jiraService.deleteJira(jiraId);
 		init();
-		
+		return "GetAllJiras";
 	}
 	
 	public String updateJira(Jira jira) {
@@ -592,7 +599,32 @@ public class JiraBean implements Serializable{
 		this.supplierInvoiceStatusList = supplierInvoiceStatusList;
 	}
 
+	public HtmlInputText getInputDateComponent() {
+		return inputDateComponent;
+	}
+
+	public void setInputDateComponent(HtmlInputText inputDateComponent) {
+		this.inputDateComponent = inputDateComponent;
+	}
+
+	public String getInvalidDate() {
+		return invalidDate;
+	}
+
+	public void setInvalidDate(String invalidDate) {
+		this.invalidDate = invalidDate;
+	}
+
+	public HtmlInputText getInputCsDateComponent() {
+		return inputCsDateComponent;
+	}
+
+	public void setInputCsDateComponent(HtmlInputText inputCsDateComponent) {
+		this.inputCsDateComponent = inputCsDateComponent;
+	}
+
 	
+
 }
 
 

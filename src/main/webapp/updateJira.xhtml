@@ -11,18 +11,18 @@
 <h3 style="border-bottom-style: double;">Details of the Selected Jira</h3>
 
 <h4>Selected Jira Details:</h4>
-	JiraNo: <h:outputText value="#{jiraBean.selectedJira.jiraNo}" />
-	JiraTitle: <h:outputText value="#{jiraBean.selectedJira.jiraTitle}" />
-	JiraStatus: <h:outputText value="#{jiraBean.selectedJira.jiraStatus}" />
-	ProjectManager: <h:outputText value="#{jiraBean.selectedJira.projectManager}" />
-	CreatedDate: <h:outputText value="#{jiraBean.selectedJira.creationDate}" />
-	Effort: <h:outputText value="#{jiraBean.selectedJira.effort}" />
-	CRFormDate: <h:outputText value="#{jiraBean.selectedJira.crFormDate}" />
-	EffortApprovalDate: <h:outputText value="#{jiraBean.selectedJira.effortApprovalDate}" />
-	PlannedUATDate: <h:outputText value="#{jiraBean.selectedJira.plannedUatDate}" />
-	ActualUATDate: <h:outputText value="#{jiraBean.selectedJira.actualUatDate}" />
-	ReleaseApprovalDate: <h:outputText value="#{jiraBean.selectedJira.liveApprovalDate}" />
-	ReleaseDate: <h:outputText value="#{jiraBean.selectedJira.releaseDate}" />
+	JiraNo: <h:outputText value="#{jiraBean.selectedJira.jiraNo}" style="background-color:#FFFFE0" />
+	JiraTitle: <h:outputText value="#{jiraBean.selectedJira.jiraTitle}" style="background-color:#FFFFE0" />
+	JiraStatus: <h:outputText value="#{jiraBean.selectedJira.jiraStatus}" style="background-color:#FFFFE0" />
+	ProjectManager: <h:outputText value="#{jiraBean.selectedJira.projectManager}" style="background-color:#FFFFE0" />
+	CreatedDate: <h:outputText value="#{jiraBean.selectedJira.creationDate}" style="background-color:#FFFFE0" />
+	Effort: <h:outputText value="#{jiraBean.selectedJira.effort}"  style="background-color:#FFFFE0"/>
+	CRFormDate: <h:outputText value="#{jiraBean.selectedJira.crFormDate}" style="background-color:#FFFFE0" />
+	EffortApprovalDate: <h:outputText value="#{jiraBean.selectedJira.effortApprovalDate}" style="background-color:#FFFFE0" />
+	PlannedUATDate: <h:outputText value="#{jiraBean.selectedJira.plannedUatDate}" style="background-color:#FFFFE0" />
+	ActualUATDate: <h:outputText value="#{jiraBean.selectedJira.actualUatDate}" style="background-color:#FFFFE0" />
+	ReleaseApprovalDate: <h:outputText value="#{jiraBean.selectedJira.liveApprovalDate}" style="background-color:#FFFFE0" />
+	ReleaseDate: <h:outputText value="#{jiraBean.selectedJira.releaseDate}"  style="background-color:#FFFFE0"/>
 	
 
 <h3 style="border-bottom-style: double;">Update Jira Details</h3>
@@ -126,6 +126,11 @@
 		<h:outputText />
 		<h:commandButton action="#{jiraBean.updateJira(jiraBean.selectedJira)}" value="Update" />
 		<h:outputText />
+		
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>	
+	
 	
 	</h:panelGrid>
 	

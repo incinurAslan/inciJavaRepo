@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import changemng_entities.Customer;
+import changemng_entities.Jira;
 import changemng_entities.Product;
 
 @Stateless
@@ -45,8 +46,12 @@ public class CustomerService {
 		
 	}
 
-
-
+	public void updateCustomer(Customer customer) {
+		
+		entityManager.merge(customer);
+		
+	}
+	
 	
 	
 	

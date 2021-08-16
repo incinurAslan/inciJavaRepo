@@ -24,6 +24,8 @@
 <th>LiveApprovalDate</th>
 <th>Release Date</th>
 <th>Update</th>
+<th>Delete</th>
+
 
 </tr>
 
@@ -52,6 +54,14 @@
 			<f:facet name="header">Action</f:facet>
 			<h:commandLink action="#{jiraBean.viewJira(jira)}" value="ClickToUpdate" />
 		</h:column></td>
+		
+
+		<td><h:column>
+			<f:facet name="header">Delete</f:facet>
+			<h:commandLink action="#{jiraBean.deleteJira(jira.jiraNr)}" value="Delete" />
+		</h:column></td>
+		
+		
 		</tr>
 	</ui:repeat>
 	

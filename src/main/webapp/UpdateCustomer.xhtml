@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+
+<h2>Update Customer Details</h2>
+
+
+<h4>Selected Customer Details:</h4>
+	Customer Name: <h:outputText value="#{customerBean.selectedCustomer.customerName}" style="background-color:#FFFFE0" />
+	Customer ManDay Rate: <h:outputText value="#{customerBean.selectedCustomer.mandayRate}" style="background-color:#FFFFE0" />
+
+
+<h3 style="border-bottom-style: double;">Update Customer Details</h3>
+	
+	<h:panelGrid columns="4">
+		 <h:outputLabel value="Customer Name" for="cnm" />
+		 <h:inputText value="#{customerBean.selectedCustomer.customerName}" id="cnm" required="true" requiredMessage="*" style="background-color:#FFFFE0"/>
+		 <h:message for="cnm"/>
+	
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+		
+		<h:outputLabel value="Customer ManDay Rate" for="cmd" />
+		 <h:inputText value="#{customerBean.selectedCustomer.mandayRate}" id="cmd" required="true" requiredMessage="*" style="background-color:#FFFFE0"/>
+		 <h:message for="cmd"/>
+		 
+
+	<tr></tr>
+	<tr></tr>
+	<tr></tr>
+
+		<h:outputText />
+		<h:commandButton action="#{customerBean.updateCustomer(customerBean.selectedCustomer)}" value="Update" />
+		<h:outputText />
+		
+	
+	</h:panelGrid>
+
+</body> 
+</html>
