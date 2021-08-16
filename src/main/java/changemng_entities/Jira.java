@@ -27,6 +27,7 @@ public class Jira {
 	private String jiraStatus;
 	private LocalDate creationDate;
 	private String projectManager;
+	
 	private double effort;
 	private LocalDate crFormDate;
 	private LocalDate effortApprovalDate;
@@ -39,7 +40,7 @@ public class Jira {
 	private CustomerInvoice jiraInvoice;
 	
 
-	@OneToOne(mappedBy = "supplierInvoicedJira" ,cascade = {CascadeType.ALL}) 
+	@OneToOne
 	private SupplierInvoice supplierJiraInvoice;
 	
 	
@@ -53,6 +54,11 @@ public class Jira {
 	
 	@OneToOne
 	private InvoiceStatus InvoiceStatusJira;
+	
+	
+	@OneToOne
+	private SupplierInvoiceStatus SupplierInvoiceStatusOfJira;
+	
 	
 	
 	public Jira() {
@@ -255,6 +261,17 @@ public class Jira {
 	}
 
 
+	public SupplierInvoiceStatus getSupplierInvoiceStatusOfJira() {
+		return SupplierInvoiceStatusOfJira;
+	}
+
+
+	public void setSupplierInvoiceStatusOfJira(SupplierInvoiceStatus supplierInvoiceStatusOfJira) {
+		SupplierInvoiceStatusOfJira = supplierInvoiceStatusOfJira;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Jira [jiraNr=" + jiraNr + ", jiraNo=" + jiraNo + ", jiraTitle=" + jiraTitle + ", jiraStatus="
@@ -266,9 +283,6 @@ public class Jira {
 				+ jiraCustomers + "]";
 	}
 
-
-	
-	
 	
 	
 }

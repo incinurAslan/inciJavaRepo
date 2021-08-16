@@ -14,6 +14,7 @@ import changemng_entities.InvoiceStatus;
 import changemng_entities.Jira;
 import changemng_entities.Product;
 import changemng_entities.SupplierInvoice;
+import changemng_entities.SupplierInvoiceStatus;
 
 @Stateless
 public class PersistTestClass {
@@ -126,6 +127,17 @@ public class PersistTestClass {
 		jira1.setInvoiceStatusJira(invoiceStatus1);
 		jira2.setInvoiceStatusJira(invoiceStatus2);
 		
+		
+		SupplierInvoiceStatus supplierInvoiceStatus1 = new SupplierInvoiceStatus("SupplierInvoiced");
+		SupplierInvoiceStatus supplierInvoiceStatus2 = new SupplierInvoiceStatus("SupplierToBeInvoiced");
+		SupplierInvoiceStatus supplierInvoiceStatus3 = new SupplierInvoiceStatus("SupplierNotToBeInvoiced");
+		
+		entityManager.persist(supplierInvoiceStatus1);
+		entityManager.persist(supplierInvoiceStatus2);
+		entityManager.persist(supplierInvoiceStatus3);
+
+		jira2.setSupplierInvoiceStatusOfJira(supplierInvoiceStatus1);
+		
 	
 		LocalDate crFormDate2 = LocalDate.of(2021, 6, 11);
 		jira2.setCrFormDate(crFormDate2);
@@ -167,10 +179,10 @@ public class PersistTestClass {
 	
 		LocalDate suppInvoiceDate3 = LocalDate.of(2021, 6, 24);
 		SupplierInvoice suppInvoice3 = new SupplierInvoice(suppInvoiceDate3);
-		
-	
 		entityManager.persist(suppInvoice3);
-		suppInvoice3.setSupplierInvoicedJira(jira2);
+		jira2.setSupplierJiraInvoice(suppInvoice3);
+		
+		//suppInvoice3.setSupplierInvoicedJira(jira2);
 		
 		Credentials credentials1 = new Credentials("iaslan", "1234", "Project Manager");
 		Credentials credentials2 = new Credentials("demetyel", "4567", "Project Manager");

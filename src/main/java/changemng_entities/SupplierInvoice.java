@@ -2,6 +2,7 @@ package changemng_entities;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +18,7 @@ public class SupplierInvoice {
 	private int suppInvoiceNo;
 	private LocalDate supplierInvoiceDate;
 	
-	@OneToOne
+	@OneToOne(mappedBy = "supplierJiraInvoice" ,cascade = {CascadeType.ALL}) 
 	private Jira supplierInvoicedJira;
 	
 
