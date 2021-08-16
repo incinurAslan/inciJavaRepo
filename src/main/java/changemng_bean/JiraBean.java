@@ -33,6 +33,7 @@ import changemng_services.SupplierInvoiceStatusService;
 @SessionScoped
 public class JiraBean implements Serializable{
 	
+	//dotforgit
 	
 	@Inject
 	private JiraService jiraService;
