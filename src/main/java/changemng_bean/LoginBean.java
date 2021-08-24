@@ -44,7 +44,7 @@ public class LoginBean implements Serializable{
 			
 			FacesContext.getCurrentInstance().addMessage("Wrong credentials",
 					new FacesMessage("Wrong credentials!", "Please check your username and password again!"));
-			return "login";
+			return "/Login.xhtml?faces-redirect=true";
 	
 		}
 		
@@ -56,7 +56,7 @@ public class LoginBean implements Serializable{
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		session.invalidate();
 		System.out.println("User Logged out");	
-		return "/login";
+		return "/Login.xhtml?faces-redirect=true";
 	}
 	
 	

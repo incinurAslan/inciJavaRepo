@@ -10,7 +10,9 @@ import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.html.HtmlInputText;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -52,11 +54,9 @@ public class JiraBean implements Serializable{
 	@Inject
 	private SupplierInvoiceStatusService supplierInvoiceStatusService;
 	
-	
 	@Inject
 	private CustomerInvoiceService customerInvoiceService;
 	
-
 	private Jira jira;
 	private List<Jira> jiras;
 	private int jiraId;
@@ -70,6 +70,7 @@ public class JiraBean implements Serializable{
 	private String actualUATdateStr;
 	private String liveApprovalDateStr;
 	private String releaseDateStr;
+	
 	private String customerInvoiceDateStr;
 	private String supplierInvoiceDateStr;
 	
@@ -124,7 +125,7 @@ public class JiraBean implements Serializable{
 		
 		this.products = productService.getAllProducts();
 		selectProducts = productService.getAllProducts();
-
+	
 	}
 	
 	
@@ -213,19 +214,33 @@ public class JiraBean implements Serializable{
 			}
 		}
 		  newJira.setSupplierInvoiceStatusOfJira(newSupplierInvSt);
-		  
-		  
-		  
+
+		 
 		jiraService.addJira(newJira); 
+		FacesContext.getCurrentInstance().addMessage("Successful!",
+				new FacesMessage("Successful!", "The new jira is registered!"));
 		init();
 		return "GetAllJiras";
+		
+		/*
+		 * if (jiraService.addJira(newJira)==true) { //boolean
+		 * 
+		 * FacesContext.getCurrentInstance().addMessage("Successful!", new
+		 * FacesMessage("Successful!", "The new jira is registered!")); init(); return
+		 * "GetAllJiras";
+		 * 
+		 * } else { FacesContext.getCurrentInstance().addMessage("Not succesful!", new
+		 * FacesMessage("Successful!", "The new jira is registered!")); }
+		 */
+		
 
 	}
 	
-	public String deleteJira(int jiraId) {
+	public void deleteJira(int jiraId) {
+		//jiraId = selectedJira.getJiraNr();
 		jiraService.deleteJira(jiraId);
 		init();
-		return "GetAllJiras";
+		//return "GetAllJiras";
 	}
 	
 	public String updateJira(Jira jira) {
@@ -251,6 +266,8 @@ public class JiraBean implements Serializable{
 		LocalDate liveApprovalDate = LocalDate.parse(liveApprovalDateStr, formatter);
 		LocalDate releaseDate = LocalDate.parse(releaseDateStr, formatter);
 		
+		selectedJira.setEffort(selectedJira.getEffort()); 
+		selectedJira.setJiraTitle(selectedJira.getJiraTitle()); 
 		
 		selectedJira.setCrFormDate(crFormDate);
 		selectedJira.setCreationDate(creationDate);
@@ -260,6 +277,64 @@ public class JiraBean implements Serializable{
 		selectedJira.setLiveApprovalDate(liveApprovalDate);
 		selectedJira.setReleaseDate(releaseDate);
 		
+		Set<Customer> custs = new HashSet<Customer>();
+		for (int selCust : selectedCustomers) {
+			Customer c = new Customer();
+			c.setCustomerNo(selCust);
+			custs.add(c);
+		}	
+		selectedJira.setJiraCustomers(custs);
+		
+		
+		//set selected products on checkbox by the user
+		Set<Product> prods = new HashSet<Product>();
+		for (int selProd : selectedProducts) {
+			Product p = new Product();
+			p.setProductNo(selProd);
+			prods.add(p);
+		}	
+		selectedJira.setJiraProducts(prods);
+	
+		
+		//Customer Invoice Status
+		InvoiceStatus newInvoiceSt = new  InvoiceStatus();
+		 for (InvoiceStatus custInvSt : invoiceStatusList) {
+			if (custInvSt.getInvoiceStatusNo()==newSelectedInvoice)
+			{
+				newInvoiceSt=custInvSt;
+				//newInvoiceSt = selectedJira.getInvoiceStatusJira(); //remove 
+				continue;
+			}
+		}		  
+		 selectedJira.setInvoiceStatusJira(newInvoiceSt);
+		 
+		
+		 //Customer Invoice Date
+		LocalDate custInvoiceDate = LocalDate.parse(customerInvoiceDateStr, formatter);
+		CustomerInvoice custInvoiceDate2 = new CustomerInvoice(custInvoiceDate); //local date'ten CustomerInvoice'e convert et
+		customerInvoiceService.addCustomerInvoice(custInvoiceDate2); //customer invoice'i persist et db'ye
+		selectedJira.setJiraInvoice(custInvoiceDate2); //onetoone ilişkisi set et
+		custInvoiceDate2.setInvoicedJira(selectedJira); //onetoone ilişkisi set et
+
+		
+		//Supplier Invoice Status  
+		SupplierInvoiceStatus newSupplierInvSt = new SupplierInvoiceStatus();
+			for (SupplierInvoiceStatus suppInvSt : supplierInvoiceStatusList) {
+				
+				if(suppInvSt.getSupplierInvoiceStatusNo()==newSelectedSupplierInvoice) {
+					newSupplierInvSt=suppInvSt;
+					continue;
+				}
+			}
+			  selectedJira.setSupplierInvoiceStatusOfJira(newSupplierInvSt);
+			  
+		
+		LocalDate suppInvoiceDate = LocalDate.parse(supplierInvoiceDateStr, formatter);
+		SupplierInvoice suppInvoiceDate2 = new SupplierInvoice(suppInvoiceDate);
+		supplierInvoiceService.addSupplierInvoice(suppInvoiceDate2); //persist supplier invoice
+		selectedJira.setSupplierJiraInvoice(suppInvoiceDate2);
+		suppInvoiceDate2.setSupplierInvoicedJira(selectedJira);
+
 		jiraService.updateJiray(selectedJira);
 		
 		return "DONE! Jira details have been updated.";

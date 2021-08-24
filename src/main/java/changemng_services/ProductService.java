@@ -5,8 +5,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import changemng_entities.Customer;
 import changemng_entities.Product;
 
 @Stateless
@@ -34,6 +32,14 @@ public class ProductService {
 		 Product deletedProduct =  entityManager.find(Product.class, productID);
 		 entityManager.remove(deletedProduct);	
 	}
+	
+
+	public void updateProduct(Product product) {
+		
+		entityManager.merge(product);
+		
+	}
+	
 	
 	
 }

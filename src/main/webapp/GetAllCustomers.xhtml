@@ -7,13 +7,67 @@
 <h:head></h:head> 
 <body> 
 
+<div style="background-color:#D3D3D3; background-size: inherit; font-style:italic; align-content:center; font-size: medium; border-bottom: gray; border-bottom-style:double; border-top: gray; border-top-style:double; padding-bottom: 1%; padding-top: 1%">
+
+<h:form>
+
+	<h:commandLink action = "GetAllJiras?faces-redirect = true" value = "Get_All_CRs">
+   </h:commandLink>
+	<h:outputText value="&#160;" />
+	<h:outputText value="&#160;" />
+	<h:outputText value="&#160;" />
+	<h:outputText value="&#160;" />
+	
+	
+   <h:commandLink action = "RegisterNewJira?faces-redirect = true" value = "Register_New_Jira">
+   </h:commandLink>
+  	<h:outputText value="&#160;" />
+	<h:outputText value="&#160;" />
+	<h:outputText value="&#160;" />
+	<h:outputText value="&#160;" />
+	
+	
+   <h:commandLink action = "AddCustomer?faces-redirect = true" value = "Add_New_Customer">
+   </h:commandLink>
+  	<h:outputText value="&#160;" />
+	<h:outputText value="&#160;" />
+	<h:outputText value="&#160;" />
+	<h:outputText value="&#160;" />
+	
+ 
+   <h:commandLink action = "GetAllProducts?faces-redirect = true" value = "Get_All_Products">
+   </h:commandLink>
+	<h:outputText value="&#160;" />
+	<h:outputText value="&#160;" />
+	<h:outputText value="&#160;" />
+	<h:outputText value="&#160;" />
+	
+   
+   <h:commandLink action = "AddProduct?faces-redirect = true" value = "Add_New_Product">
+   </h:commandLink>
+  	<h:outputText value="&#160;" />
+	<h:outputText value="&#160;" />
+	<h:outputText value="&#160;" />
+	<h:outputText value="&#160;" />
+	
+ 
+   
+   <h:commandLink action = "#{loginBean.logout()}" value = "Log Out">
+   </h:commandLink>
+   
+</h:form>
+
+</div>
+
+
 <h2 style="border-bottom-style: double;">All Customers Records </h2>
 <table cellpadding="2" cellspacing="2" border="2">
 <tr style="background-color: black; color:white; text-align: left;">
 <th>Customer No</th>
 <th>Customer Name</th>
 <th>Customer ManDay Rate</th>
-<th>Action</th>
+<th>Update</th>
+<th>Delete</th>
 
 </tr>
 
@@ -30,8 +84,16 @@
 			<f:facet name="header">Action</f:facet>
 			<h:commandLink action="#{customerBean.viewCustomer(customer)}" value="ClickToUpdate" />
 		</h:column></td>
+		
+		
+		<td><h:column>
+			<f:facet name="header">Delete</f:facet>
+			<h:commandLink action="#{customerBean.deleteCustomer(customer.customerNo)}" value="Delete" />
+		</h:column></td>
 		</tr>
 	</ui:repeat>
+	
+	
 	
 </h:form>
 

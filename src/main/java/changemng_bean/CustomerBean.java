@@ -22,7 +22,6 @@ public class CustomerBean implements Serializable{
 	
 	//private static final long serialVersionUID = 1L;
 	
-
 	@Inject
 	private CustomerService customerService;
 
@@ -50,25 +49,28 @@ public class CustomerBean implements Serializable{
 	public String saveNewCustomer() {
 		
 		customerService.addCustomer(customer);
-		return null;
+		init();
+		return "GetAllCustomers";
 				
 	}
 
-	public void deleteCustomer(int customerId) {
+	public String deleteCustomer(int customerId) {
 		customerService.deleteCustomer(customerId);
 		init();
+		return "GetAllCustomers";
 		
 	}
 	
 	public String updateCustomer(Customer customer) {
 		
-		selectedCustomer.setCustomerName(customer.getCustomerName());
-		selectedCustomer.setMandayRate(customer.getMandayRate());
-	
-		customerService.updateCustomer(selectedCustomer);
+		selectedCustomer.setCustomerName(selectedCustomer.getCustomerName());
+		selectedCustomer.setMandayRate(selectedCustomer.getMandayRate());
+		
+		customerService.updateCustomer(customer);
 		init();
 		
-		return "GetAllCustomers";
+		return "Successful";
+		//return "GetAllCustomers";
 		
 	}
 	

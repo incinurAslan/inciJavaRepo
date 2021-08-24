@@ -88,6 +88,8 @@ public class Customer {
 	 * public void setCustomerProducts(List<Product> customerProducts) {
 	 * this.customerProducts = customerProducts; }
 	 */
+	
+	
 	public List<Jira> getCustomerJiras() {
 		return customerJiras;
 	}
@@ -102,14 +104,6 @@ public class Customer {
 	public String toString() {
 		return "Customer [customerNo=" + customerNo + ", customerName=" + customerName+  "]";
 	}
-
-	
-	
-	
-	
-
-	
-
 
 	
 }

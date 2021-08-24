@@ -9,6 +9,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import changemng_entities.Customer;
 import changemng_entities.Product;
 import changemng_services.ProductService;
 
@@ -28,11 +29,16 @@ public class ProductBean implements Serializable {
 	
 	private int productId;
 	
+	private Product selectedProduct;
+	
 
 	@PostConstruct
 	public void init() {
 		this.products = productService.getAllProducts();
 		this.product = new Product();
+		
+		this.selectedProduct = new Product();
+		
 		//this.selectedProducts = new ArrayList<Product>();
 	}
 	
@@ -40,7 +46,8 @@ public class ProductBean implements Serializable {
 	public String saveNewProduct() {
 		
 		productService.addProduct(product);
-		return null;
+		init();
+		return "GetAllProducts";
 				
 	}
 
@@ -54,11 +61,28 @@ public class ProductBean implements Serializable {
 	public ProductService getProductService() {
 		return productService;
 	}
-//
-//	
-//	public void submit() {
-//	    System.out.println("Selected products: " + selectedProducts);
-//	}
+	
+	public String updateProduct(Product product) {
+
+		selectedProduct.setProductName(selectedProduct.getProductName());
+		init();
+		return "GetAllProducts";
+		
+	}
+	
+	
+	
+	
+	public String viewProduct(Product product) {
+		
+		selectedProduct = product;
+		
+		return "/UpdateProduct.xhtml?faces-redirect=true"; 
+		
+	}
+	
+	
+	
 	
 	public void setProductService(ProductService productService) {
 		this.productService = productService;
@@ -95,18 +119,14 @@ public class ProductBean implements Serializable {
 	}
 
 
-//	public List<Product> getSelectedProducts() {
-//		return selectedProducts;
-//	}
-//
-//
-//	public void setSelectedProducts(List<Product> selectedProducts) {
-//		this.selectedProducts = selectedProducts;
-//	}
-//	
-	
-	
-	
-	
-	
+	public Product getSelectedProduct() {
+		return selectedProduct;
+	}
+
+
+	public void setSelectedProduct(Product selectedProduct) {
+		this.selectedProduct = selectedProduct;
+	}
+
+
 }

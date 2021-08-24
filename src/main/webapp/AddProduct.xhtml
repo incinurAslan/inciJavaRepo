@@ -18,17 +18,9 @@
 	<h:outputText value="&#160;" />
 	<h:outputText value="&#160;" />
 	<h:outputText value="&#160;" />
-
-
-	<h:commandLink action = "RegisterNewJira?faces-redirect = true" value = "Register_New_CR">
-   </h:commandLink>
-	<h:outputText value="&#160;" />
-	<h:outputText value="&#160;" />
-	<h:outputText value="&#160;" />
-	<h:outputText value="&#160;" />
 	
 	
-   <h:commandLink action = "GetAllCustomers?faces-redirect = true" value = "Get_All_Customers">
+   <h:commandLink action = "RegisterNewJira?faces-redirect = true" value = "Register_New_Jira">
    </h:commandLink>
   	<h:outputText value="&#160;" />
 	<h:outputText value="&#160;" />
@@ -44,7 +36,7 @@
 	<h:outputText value="&#160;" />
 	
  
-   <h:commandLink action = "GetAllProducts?faces-redirect = true" value = "Get_All_Products">
+   <h:commandLink action = "GetAllCustomers?faces-redirect = true" value = "Get_All_Customers">
    </h:commandLink>
 	<h:outputText value="&#160;" />
 	<h:outputText value="&#160;" />
@@ -52,55 +44,46 @@
 	<h:outputText value="&#160;" />
 	
    
-   <h:commandLink action = "AddProduct?faces-redirect = true" value = "Add_New_Product">
+   <h:commandLink action = "GetAllProducts?faces-redirect = true" value = "Add_New_Product">
    </h:commandLink>
   	<h:outputText value="&#160;" />
 	<h:outputText value="&#160;" />
 	<h:outputText value="&#160;" />
 	<h:outputText value="&#160;" />
-
-   
-    <h:commandLink action = "#{loginBean.logout()}" value = "Log Out">
+	
+     <h:commandLink action = "#{loginBean.logout()}" value = "Log Out">
    </h:commandLink>
-
+   
 </h:form>
 </div>
 
-<h2>Update Customer Details</h2>
+<h3 style="border-bottom-style: double;">Add New Product</h3>
 
+<h:form>
 
-<h4>Selected Customer Details:</h4>
-	Customer Name: <h:outputText value="#{customerBean.selectedCustomer.customerName}" style="background-color:#FFFFE0" />
-	Customer ManDay Rate: <h:outputText value="#{customerBean.selectedCustomer.mandayRate}" style="background-color:#FFFFE0" />
-
-
-<h3 style="border-bottom-style: double;">Update Customer Details</h3>
-	
-	<h:panelGrid columns="4">
-		 <h:outputLabel value="Customer Name" for="cnm" />
-		 <h:inputText value="#{customerBean.selectedCustomer.customerName}" id="cnm" required="true" requiredMessage="*" style="background-color:#FFFFE0"/>
-		 <h:message for="cnm"/>
-	
-	<tr></tr>
-	<tr></tr>
-	<tr></tr>
-	<tr></tr>
+	<h:panelGrid columns="3">
+		 <h:outputLabel value="Product Name" for="pn" />
+		 <h:inputText value="#{productBean.product.productName}" style="background-color:#FFFFE0" id="cn" required="true" requiredMessage="*"/>
+		 <h:message for="pn"/>
 		
-		<h:outputLabel value="Customer ManDay Rate" for="cmd" />
-		 <h:inputText value="#{customerBean.selectedCustomer.mandayRate}" id="cmd" required="true" requiredMessage="*" style="background-color:#FFFFE0"/>
-		 <h:message for="cmd"/>
-		 
-
-	<tr></tr>
-	<tr></tr>
-	<tr></tr>
-
 		<h:outputText />
-		<h:commandButton action="#{customerBean.updateCustomer(customerBean.selectedCustomer)}" value="Update" />
+		<h:commandButton action="#{productBean.saveNewProduct()}" value="Save Product" />
 		<h:outputText />
-		
-	
+
 	</h:panelGrid>
+	
+ </h:form>
+
+
+
+
+
+
+
+
+
+
+
 
 </body> 
 </html>
