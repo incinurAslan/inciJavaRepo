@@ -236,11 +236,11 @@ public class JiraBean implements Serializable{
 
 	}
 	
-	public void deleteJira(int jiraId) {
+	public String deleteJira(int jiraId) {
 		//jiraId = selectedJira.getJiraNr();
 		jiraService.deleteJira(jiraId);
 		init();
-		//return "GetAllJiras";
+		return "GetAllJiras";
 	}
 	
 	public String updateJira(Jira jira) {

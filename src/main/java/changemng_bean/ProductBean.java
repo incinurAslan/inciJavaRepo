@@ -31,15 +31,15 @@ public class ProductBean implements Serializable {
 	
 	private Product selectedProduct;
 	
+	private List<Product> productsByName;
 
 	@PostConstruct
 	public void init() {
+		
 		this.products = productService.getAllProducts();
 		this.product = new Product();
-		
 		this.selectedProduct = new Product();
-		
-		//this.selectedProducts = new ArrayList<Product>();
+	
 	}
 	
 	
@@ -72,7 +72,6 @@ public class ProductBean implements Serializable {
 	
 	
 	
-	
 	public String viewProduct(Product product) {
 		
 		selectedProduct = product;
@@ -82,6 +81,13 @@ public class ProductBean implements Serializable {
 	}
 	
 	
+	
+	public List<Product> getProductsByProdName(){
+		products = productService.searchByProductName(product.getProductName());
+		return products;
+	}
+	
+
 	
 	
 	public void setProductService(ProductService productService) {
@@ -128,5 +134,16 @@ public class ProductBean implements Serializable {
 		this.selectedProduct = selectedProduct;
 	}
 
+	public void setProductsByName(List<Product> productsByName) {
+		this.productsByName = productsByName;
+	}
+
+
+	public List<Product> getProductsByName() {
+		return productsByName;
+	}
+
+	
+	
 
 }

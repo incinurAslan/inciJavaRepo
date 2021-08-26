@@ -270,8 +270,6 @@ public class Jira {
 		SupplierInvoiceStatusOfJira = supplierInvoiceStatusOfJira;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "Jira [jiraNr=" + jiraNr + ", jiraNo=" + jiraNo + ", jiraTitle=" + jiraTitle + ", jiraStatus="

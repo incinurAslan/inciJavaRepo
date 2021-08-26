@@ -34,14 +34,18 @@ public class CustomerBean implements Serializable{
 	private Product product;
 	
 	private Customer selectedCustomer;
+	
+	private List<Customer> customersByName;
 
 	@PostConstruct
 	public void init() {
 		
 		this.customers = customerService.getAllCustomers();
+		//this.customers = customerService.searchByCustomerName(" ");
 		this.customer = new Customer();
 		this.product = new Product();
 		this.selectedCustomer = new Customer();
+		//this.customersByName = customerService.searchByCustomerName(" ");
 		
 	}
 	
@@ -74,6 +78,11 @@ public class CustomerBean implements Serializable{
 		
 	}
 	
+	public String updateCustomer2() {
+		customerService.updateCustomer(selectedCustomer);
+		return "/GetAllCustomers.xhtml?faces-redirect=true";
+	}
+	
 	
 	public String viewCustomer(Customer customer) {
 		
@@ -82,6 +91,15 @@ public class CustomerBean implements Serializable{
 		return "/UpdateCustomer.xhtml?faces-redirect=true"; 
 		
 	}
+	
+	
+	public List<Customer> getCustomersByCustName(){
+		customers = customerService.searchByCustomerName("");
+		customersByName = customerService.searchByCustomerName(customer.getCustomerName());
+		customers = customersByName;
+		return customers;
+	}
+	
 	
 	
 	public CustomerService getCustomerService() {
@@ -142,9 +160,16 @@ public class CustomerBean implements Serializable{
 	public void setSelectedCustomer(Customer selectedCustomer) {
 		this.selectedCustomer = selectedCustomer;
 	}
-	
-	
-	
-	
+
+
+	public List<Customer> getCustomersByName() {
+		return customersByName;
+	}
+
+
+	public void setCustomersByName(List<Customer> customersByName) {
+		this.customersByName = customersByName;
+	}
+
 	
 }

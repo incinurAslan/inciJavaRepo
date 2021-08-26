@@ -41,5 +41,11 @@ public class ProductService {
 	}
 	
 	
+	public List<Product> searchByProductName(String productName){
+		return entityManager.createQuery("select p from Product p where UPPER(p.productName) LIKE '%" + productName + "%'", Product.class).getResultList();
+	
+	}
+	
+	
 	
 }

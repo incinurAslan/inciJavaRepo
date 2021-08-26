@@ -6,11 +6,9 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import changemng_entities.Customer;
-import changemng_entities.CustomerInvoice;
 import changemng_entities.Jira;
-import changemng_entities.Product;
-import changemng_entities.SupplierInvoice;
+
+
 
 @Stateless
 public class JiraService {
@@ -44,6 +42,13 @@ public class JiraService {
 		entityManager.merge(jira);
 		
 	}
+	
+	
+	public List<Jira> searchByProjectManagerName(String projectManagerName){
+		return entityManager.createQuery("select j from Jira j where UPPER(j.projectManager) LIKE '%" + projectManagerName + "%'", Jira.class).getResultList();
+	
+	}
+	
 	
 	
 	

@@ -7,8 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import changemng_entities.Customer;
-import changemng_entities.Jira;
-import changemng_entities.Product;
 
 @Stateless
 public class CustomerService {
@@ -17,11 +15,11 @@ public class CustomerService {
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	
 	public List<Customer> getAllCustomers()
 	{
 		return entityManager.createQuery("select c from Customer c", Customer.class).getResultList();
 	}
-	
 	
 	/*
 	 * public List<Customer> getAllCustomersByJiraNr(int jiraId){ return
@@ -32,18 +30,15 @@ public class CustomerService {
 	
 	
 	public void addCustomer(Customer customer)
+	
 	{
-
 		entityManager.persist(customer);
-
 	}
 	
 	
-
 	public void deleteCustomer(int customerID) {
 		 Customer deletedCustomer =  entityManager.find(Customer.class, customerID);
-		 entityManager.remove(deletedCustomer);
-		
+		 entityManager.remove(deletedCustomer);	
 	}
 
 	public void updateCustomer(Customer customer) {
@@ -52,6 +47,9 @@ public class CustomerService {
 		
 	}
 	
+	public List<Customer> searchByCustomerName(String customerName){
+		return entityManager.createQuery("select c from Customer c where UPPER(c.customerName) LIKE '%" + customerName + "%'", Customer.class).getResultList();
 	
+	}
 	
 }

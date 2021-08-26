@@ -5,7 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"> 
 
 <h:head></h:head> 
-<body> 
+<body style="align-items: center; align-content:center; align-self:center;  border-bottom-style: double; border-top-style:double; border-spacing: 600cm; border-left-style:double; border-right-style:double; border-width: 0.3cm; border-color:gray; padding-left: 0.5%; padding-right: 0.5%; padding-top: 0.5%; padding-bottom: 0.5%;"> 
 
 <div style="background-color:#D3D3D3; background-size: inherit; font-style:italic; align-content:center; font-size: medium; border-bottom: gray; border-bottom-style:double; border-top: gray; border-top-style:double; padding-bottom: 1%; padding-top: 1%">
 
@@ -96,10 +96,9 @@
 	<tr></tr>
 
 		<h:outputText />
-		<h:commandButton action="#{customerBean.updateCustomer(customerBean.selectedCustomer)}" value="Update" />
+		<h:commandButton action="#{customerBean.updateCustomer2()}" value="Update" />
 		<h:outputText />
-		
-	
+			
 	</h:panelGrid>
 
 </body> 

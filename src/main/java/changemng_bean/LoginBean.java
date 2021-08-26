@@ -44,7 +44,8 @@ public class LoginBean implements Serializable{
 			
 			FacesContext.getCurrentInstance().addMessage("Wrong credentials",
 					new FacesMessage("Wrong credentials!", "Please check your username and password again!"));
-			return "/Login.xhtml?faces-redirect=true";
+			
+			return "/Login";
 	
 		}
 		
