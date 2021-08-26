@@ -94,9 +94,13 @@ public class CustomerBean implements Serializable{
 	
 	
 	public List<Customer> getCustomersByCustName(){
-		customers = customerService.searchByCustomerName("");
-		customersByName = customerService.searchByCustomerName(customer.getCustomerName());
-		customers = customersByName;
+		
+		customers = customerService.getAllCustomers();
+		if(customer.getCustomerName() != null) {
+
+			customers = customerService.searchByCustomerName(customer.getCustomerName());
+			
+		}
 		return customers;
 	}
 	

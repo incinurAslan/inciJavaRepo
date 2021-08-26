@@ -5,7 +5,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import changemng_entities.Jira;
 
 
@@ -49,6 +48,11 @@ public class JiraService {
 	
 	}
 	
+	
+	public List<Jira> searchByJiraNumber(String jiraNo){
+		return entityManager.createQuery("select j from Jira j where UPPER(j.jiraNo) LIKE '%" + jiraNo + "%'", Jira.class).getResultList();
+	
+	}
 	
 	
 	

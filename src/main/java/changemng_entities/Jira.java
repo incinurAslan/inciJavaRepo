@@ -276,9 +276,7 @@ public class Jira {
 				+ jiraStatus + ", creationDate=" + creationDate + ", projectManager=" + projectManager + ", effort="
 				+ effort + ", crFormDate=" + crFormDate + ", effortApprovalDate=" + effortApprovalDate
 				+ ", plannedUatDate=" + plannedUatDate + ", actualUatDate=" + actualUatDate + ", liveApprovalDate="
-				+ liveApprovalDate + ", releaseDate=" + releaseDate + ", jiraInvoice=" + jiraInvoice
-				+ ", supplierJiraInvoice=" + supplierJiraInvoice + ", jiraProducts=" + jiraProducts + ", jiraCustomers="
-				+ jiraCustomers + "]";
+				+ liveApprovalDate + ", releaseDate=" + releaseDate + "]";
 	}
 
 	

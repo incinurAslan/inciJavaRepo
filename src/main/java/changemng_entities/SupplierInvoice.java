@@ -73,7 +73,7 @@ public class SupplierInvoice {
 	@Override
 	public String toString() {
 		return "SupplierInvoice [suppInvoiceNo=" + suppInvoiceNo + ", supplierInvoiceDate=" + supplierInvoiceDate
-				+ ", supplierInvoicedJira=" + supplierInvoicedJira + "]";
+				+ "]";
 	}
 	
 	

@@ -7,11 +7,12 @@
 <h:head></h:head> 
 <body style="align-items: center; align-content:center; align-self:center;  border-bottom-style: double; border-top-style:double; border-spacing: 600cm; border-left-style:double; border-right-style:double; border-width: 0.3cm; border-color:gray; padding-left: 0.5%; padding-right: 0.5%; padding-top: 0.5%; padding-bottom: 0.5%;"> 
 
+
 <div style="background-color:#D3D3D3; background-size: inherit; font-style:italic; align-content:center; font-size: medium; border-bottom: gray; border-bottom-style:double; border-top: gray; border-top-style:double; padding-bottom: 1%; padding-top: 1%">
 
 <h:form>
 
-	<h:commandLink action = "GetAllJiras?faces-redirect = true" value = "Get_All_CRs">
+	<h:commandLink action = "RegisterNewJira?faces-redirect = true" value = "Register_New_CR">
    </h:commandLink>
 	<h:outputText value="&#160;" />
 	<h:outputText value="&#160;" />
@@ -19,7 +20,7 @@
 	<h:outputText value="&#160;" />
 	
 	
-   <h:commandLink action = "RegisterNewJira?faces-redirect = true" value = "Register_New_Jira">
+   <h:commandLink action = "GetAllCustomers?faces-redirect = true" value = "Get_All_Customers">
    </h:commandLink>
   	<h:outputText value="&#160;" />
 	<h:outputText value="&#160;" />
@@ -49,70 +50,81 @@
 	<h:outputText value="&#160;" />
 	<h:outputText value="&#160;" />
 	<h:outputText value="&#160;" />
-	
- 
+
    
-   <h:commandLink action = "#{loginBean.logout()}" value = "Log Out">
+    <h:commandLink action = "#{loginBean.logout()}" value = "Log Out">
    </h:commandLink>
    
 </h:form>
-
 </div>
 
 
-<h2 style="border-bottom-style: double;">All Customers Records </h2>
-<table cellpadding="2" cellspacing="2" border="2">
-<tr style="background-color: black; color:white; text-align: left;">
-<th>Customer No</th>
-<th>Customer Name</th>
-<th>Customer ManDay Rate</th>
-<th>Update</th>
-<th>Delete</th>
-
-</tr>
-
-<!-- <h:form>
-
-<h:outputLabel value="Search By Customer Name: " style="font-style: italic; "/>
-<h:inputText value="#{customerBean.customer.customerName}" onkeypress="#{customerBean.customersByName}"/>
-<br>
-
-</br>
-</h:form> -->
-
 <h:form>
 
-<h:outputLabel value="Search By Customer Name: " style="font-style: italic; "/>
-<h:inputText value="#{customerBean.customer.customerName}" onkeypress="#{customerBean.customersByCustName}"/>
+<h:outputLabel value="Search By Jira No: " style="font-style: italic; "/>
+<h:inputText value="#{jiraBean.jira.jiraNo}" onkeypress="#{jiraBean.jirasByJiraNo}"/>
 <br>
 
 </br>
 </h:form>
 
 
-<h:form>
 
-	<ui:repeat var="customer" value="#{customerBean.customers}">
+<h2 style="border-bottom-style: double;">All CR Records</h2>
+<table cellpadding="2" cellspacing="2" border="2">
+<tr style="background-color: black; color:white; text-align: left;">
+<th>JiraNo</th>
+<th>JiraCustomer</th>
+<th>Title</th>
+<th>Status</th>
+<th>ProjectManager</th>
+<th>CreationDate</th>
+<th>Effort</th>
+<th>CRFormDate</th>
+<th>EffortApprovalDate</th>
+<th>PlannedUatDate</th>
+<th>ActualUatDate</th>
+<th>LiveApprovalDate</th>
+<th>Release Date</th>
+<th>Update</th>
+<th>Delete</th>
+</tr>
+
+<h:form>
+	<ui:repeat var="jira" value="#{jiraBean.jiras}">
 		<tr style="background-color:threedlightshadow;">
-		<td>#{customer.customerNo}</td>
-		<td>#{customer.customerName}</td>
-		<td>#{customer.mandayRate}</td>
+		<td>#{jira.jiraNo}</td>
+		<td>
+			<ui:repeat var="jcustomer" value="#{jira.jiraCustomers}">
+				#{jcustomer.customerName}
+			</ui:repeat>
+		</td>
+		<td>#{jira.jiraTitle}</td>
+		<td>#{jira.jiraStatus}</td>
+		<td>#{jira.projectManager}</td>
+		<td>#{jira.creationDate}</td>
+		<td>#{jira.effort}</td>
+		<td>#{jira.crFormDate}</td>
+		<td>#{jira.effortApprovalDate}</td>
+		<td>#{jira.plannedUatDate}</td>
+		<td>#{jira.actualUatDate}</td>
+		<td>#{jira.liveApprovalDate}</td>
+		<td>#{jira.releaseDate}</td>
 		
 		<td><h:column>
 			<f:facet name="header">Action</f:facet>
-			<h:commandLink action="#{customerBean.viewCustomer(customer)}" value="ClickToUpdate" />
+			<h:commandLink action="#{jiraBean.viewJira(jira)}" value="ClickToUpdate" />
 		</h:column></td>
-		
 		
 		<td><h:column>
 			<f:facet name="header">Delete</f:facet>
-			<h:commandLink action="#{customerBean.deleteCustomer(customer.customerNo)}" value="Delete" />
+			<h:commandLink action="#{jiraBean.deleteJira(jira.jiraNr)}" value="Delete" />
 		</h:column></td>
+		
 		</tr>
 	</ui:repeat>
 	
 </h:form>
-
 </table>
 
 </body> 

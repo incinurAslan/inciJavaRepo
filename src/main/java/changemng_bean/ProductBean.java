@@ -83,11 +83,17 @@ public class ProductBean implements Serializable {
 	
 	
 	public List<Product> getProductsByProdName(){
-		products = productService.searchByProductName(product.getProductName());
+		
+		products = productService.getAllProducts();
+		
+		if(product.getProductName() != null) {
+			
+			products = productService.searchByProductName(product.getProductName());
+			
+		}
+		
 		return products;
 	}
-	
-
 	
 	
 	public void setProductService(ProductService productService) {

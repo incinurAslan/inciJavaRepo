@@ -1,4 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
@@ -57,6 +58,19 @@
    
 </h:form>
 </div>
+
+<br>
+
+</br>
+
+<h:form>
+
+<h:outputLabel value="Search By Jira No: " style="font-style: italic; "/>
+<h:inputText value="#{jiraBean.jira.jiraNo}" onkeypress="#{jiraBean.jirasByJiraNo}"/>
+<br>
+
+</br>
+</h:form>
 
 
 <h2 style="border-bottom-style: double;">All CR Records</h2>

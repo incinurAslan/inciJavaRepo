@@ -340,7 +340,20 @@ public class JiraBean implements Serializable{
 		return "DONE! Jira details have been updated.";
 	}
 	
-
+	
+	public List<Jira> getJirasByJiraNo(){
+	
+		jiras = jiraService.getAllJiras();
+		
+		if(jira.getJiraNo() != null) {
+			
+			jiras = jiraService.searchByJiraNumber(jira.getJiraNo());
+		}
+		return jiras;
+		
+	}
+	
+	
 	public String viewJira(Jira jira) {
 		
 		selectedJira = jira;
