@@ -1,10 +1,12 @@
 package changemng_bean;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -238,11 +240,58 @@ public class JiraBean implements Serializable{
 	
 	public String deleteJira(int jiraId) {
 		//jiraId = selectedJira.getJiraNr();
+		
 		jiraService.deleteJira(jiraId);
+		
 		init();
+		
 		return "GetAllJiras";
 	}
 	
+	
+	public String countTotalEffort() { //counting the effort*manday for each customer's rate for each jira
+		
+		DecimalFormat numberFormat = new DecimalFormat("#.000");
+		
+		double sum = 0.0;
+		
+		for (Jira jira : jiras) {
+			
+			for (Customer customer : jira.getJiraCustomers()) {
+				
+				sum += customer.getMandayRate()*jira.getEffort();
+				
+			}
+			
+		}
+		
+		return numberFormat.format(sum);
+				
+	}
+	
+
+	
+	public String getEachJiraPrice(Jira jira) {
+		
+		DecimalFormat numberFormat = new DecimalFormat("#.000");
+		
+		double sum = 0.0;
+		
+		for (Customer customer : jira.getJiraCustomers()) {
+			
+			sum += jira.getEffort()*customer.getMandayRate();
+			
+		}
+		
+		String sumStr = numberFormat.format(sum);
+		
+		return sumStr;
+	}
+	
+	
+	
+	
+
 	public String updateJira(Jira jira) {
 	
 		//formatter
@@ -353,6 +402,24 @@ public class JiraBean implements Serializable{
 		
 	}
 	
+	
+	
+	  public List<Jira> getJirasByProjectManagerName(){
+	  
+		  jiras = jiraService.getAllJiras();
+	  
+		  	if(jira.getProjectManager() != null) {
+	  
+		  	jiras = jiraService.searchByProjectManagerName(jira.getProjectManager()); }
+		  	
+		  	return jiras;
+	  	}
+	  		
+
+
+	  
+	  
+	  
 	
 	public String viewJira(Jira jira) {
 		

@@ -3,9 +3,13 @@ package changemng_services;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.management.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import changemng_entities.Customer;
 import changemng_entities.Jira;
+import changemng_entities.Product;
 
 
 
@@ -30,9 +34,27 @@ public class JiraService {
 	
 
 	public void deleteJira(int jiraID) {
-		 Jira deletedJira =  entityManager.find(Jira.class, jiraID);
-		 entityManager.remove(deletedJira);
 		
+		 Jira deletedJira =  entityManager.find(Jira.class, jiraID);
+	 
+			/*
+			 * for (Product prod : deletedJira.getJiraProducts()) {
+			 * 
+			 * entityManager.remove("SELECT p FROM Product WHERE p.productNo = " +
+			 * prod.getProductNo()); //product'ın kendisini siliyor mu kontrol et
+			 * 
+			 * }
+			 * 
+			 * for (Customer cust : deletedJira.getJiraCustomers()) {
+			 * 
+			 * entityManager.remove("SELECT c FROM Customer WHERE c.customerNo = " +
+			 * cust.getCustomerNo());
+			 * 
+			 * 
+			 * }
+			 */
+		entityManager.remove(deletedJira);
+
 	}
 	
 	
@@ -43,10 +65,12 @@ public class JiraService {
 	}
 	
 	
-	public List<Jira> searchByProjectManagerName(String projectManagerName){
-		return entityManager.createQuery("select j from Jira j where UPPER(j.projectManager) LIKE '%" + projectManagerName + "%'", Jira.class).getResultList();
 	
+	public List<Jira> searchByProjectManagerName(String projectManagerName){
+		  return entityManager.createQuery("select j from Jira j where UPPER(j.projectManager) LIKE '%" + projectManagerName + "%'", Jira.class).getResultList();
+	  
 	}
+	 
 	
 	
 	public List<Jira> searchByJiraNumber(String jiraNo){

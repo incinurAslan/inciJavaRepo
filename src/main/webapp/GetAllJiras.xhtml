@@ -67,10 +67,23 @@
 
 <h:outputLabel value="Search By Jira No: " style="font-style: italic; "/>
 <h:inputText value="#{jiraBean.jira.jiraNo}" onkeypress="#{jiraBean.jirasByJiraNo}"/>
-<br>
 
-</br>
+	<h:outputText value="&#160;" />
+	<h:outputText value="&#160;" />
+	
 </h:form>
+
+<h:form>
+
+<h:outputLabel value="Search By PM: " style="font-style: italic; "/>
+
+<h:inputText value="#{jiraBean.jira.projectManager}" onkeypress="#{jiraBean.jirasByProjectManagerName}"/>
+
+	<h:outputText value="&#160;" />
+	<h:outputText value="&#160;" />
+	
+</h:form>
+
 
 
 <h2 style="border-bottom-style: double;">All CR Records</h2>
@@ -88,7 +101,8 @@
 <th>PlannedUatDate</th>
 <th>ActualUatDate</th>
 <th>LiveApprovalDate</th>
-<th>Release Date</th>
+<th>ReleaseDate</th>
+<th>JiraPrice</th>
 <th>Update</th>
 <th>Delete</th>
 </tr>
@@ -113,6 +127,7 @@
 		<td>#{jira.actualUatDate}</td>
 		<td>#{jira.liveApprovalDate}</td>
 		<td>#{jira.releaseDate}</td>
+		<td>#{jiraBean.getEachJiraPrice(jira)}</td>
 		
 		<td><h:column>
 			<f:facet name="header">Action</f:facet>
@@ -124,10 +139,22 @@
 			<h:commandLink action="#{jiraBean.deleteJira(jira.jiraNr)}" value="Delete" />
 		</h:column></td>
 		
+		
 		</tr>
+		
 	</ui:repeat>
 	
-</h:form>
+	
+	<h:outputText value="The Total Price of the CRs: " style="background-color:#FFFFE0;"/>
+	<h:outputLabel value="#{jiraBean.countTotalEffort()}"  />
+	
+	<br>
+	
+	</br>
+	
+	</h:form>
+	
+
 </table>
 
 </body> 
