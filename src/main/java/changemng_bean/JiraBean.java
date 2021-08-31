@@ -219,23 +219,13 @@ public class JiraBean implements Serializable{
 
 		 
 		jiraService.addJira(newJira); 
+		
+		
 		FacesContext.getCurrentInstance().addMessage("Successful!",
 				new FacesMessage("Successful!", "The new jira is registered!"));
 		init();
 		return "GetAllJiras";
 		
-		/*
-		 * if (jiraService.addJira(newJira)==true) { //boolean
-		 * 
-		 * FacesContext.getCurrentInstance().addMessage("Successful!", new
-		 * FacesMessage("Successful!", "The new jira is registered!")); init(); return
-		 * "GetAllJiras";
-		 * 
-		 * } else { FacesContext.getCurrentInstance().addMessage("Not succesful!", new
-		 * FacesMessage("Successful!", "The new jira is registered!")); }
-		 */
-		
-
 	}
 	
 	public String deleteJira(int jiraId) {
@@ -249,7 +239,7 @@ public class JiraBean implements Serializable{
 	}
 	
 	
-	public String countTotalEffort() { //counting the effort*manday for each customer's rate for each jira
+	public String countTotalEffort() { //counting the effort*manday on all the jiras in the table
 		
 		DecimalFormat numberFormat = new DecimalFormat("#.000");
 		
@@ -271,7 +261,7 @@ public class JiraBean implements Serializable{
 	
 
 	
-	public String getEachJiraPrice(Jira jira) {
+	public String getEachJiraPrice(Jira jira) { //counting each jira's price by multiplying with MD rate in customer entity
 		
 		DecimalFormat numberFormat = new DecimalFormat("#.000");
 		
@@ -406,18 +396,34 @@ public class JiraBean implements Serializable{
 	
 	  public List<Jira> getJirasByProjectManagerName(){
 	  
-		  jiras = jiraService.getAllJiras();
+		    jiras = jiraService.getAllJiras();
 	  
 		  	if(jira.getProjectManager() != null) {
 	  
 		  	jiras = jiraService.searchByProjectManagerName(jira.getProjectManager()); }
 		  	
 		  	return jiras;
+		  	
+		  	
 	  	}
+
+	 
+		/*
+		 * public List<Jira> getJirasByProductName(){
+		 * 
+		 * jiras = jiraService.getAllJiras();
+		 * 
+		 * if(jira.getJiraProducts() != null) {
+		 * 
+		 * for (Product prod : jira.getJiraProducts()) {
+		 * 
+		 * jiras = jiraService.searchByProductName(prod.getProductName());} }
+		 * 
+		 * return jiras;
+		 * 
+		 * }
+		 */
 	  		
-
-
-	  
 	  
 	  
 	

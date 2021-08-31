@@ -63,6 +63,8 @@
 
 </br>
 
+<div>
+
 <h:form>
 
 <h:outputLabel value="Search By Jira No: " style="font-style: italic; "/>
@@ -84,7 +86,7 @@
 	
 </h:form>
 
-
+</div>
 
 <h2 style="border-bottom-style: double;">All CR Records</h2>
 <table cellpadding="2" cellspacing="2" border="2">
@@ -92,6 +94,7 @@
 <th>JiraNo</th>
 <th>JiraCustomer</th>
 <th>Title</th>
+<th>JiraProducts</th>
 <th>Status</th>
 <th>ProjectManager</th>
 <th>CreationDate</th>
@@ -117,6 +120,11 @@
 			</ui:repeat>
 		</td>
 		<td>#{jira.jiraTitle}</td>
+		<td>
+			<ui:repeat var="jproduct" value="#{jira.jiraProducts}">
+				#{jproduct.productName}
+			</ui:repeat>
+		</td>
 		<td>#{jira.jiraStatus}</td>
 		<td>#{jira.projectManager}</td>
 		<td>#{jira.creationDate}</td>

@@ -36,7 +36,7 @@ public class JiraService {
 	public void deleteJira(int jiraID) {
 		
 		 Jira deletedJira =  entityManager.find(Jira.class, jiraID);
-	 
+	
 			/*
 			 * for (Product prod : deletedJira.getJiraProducts()) {
 			 * 
@@ -53,6 +53,7 @@ public class JiraService {
 			 * 
 			 * }
 			 */
+			 
 		entityManager.remove(deletedJira);
 
 	}
@@ -79,6 +80,14 @@ public class JiraService {
 	}
 	
 	
+	/*
+	 * public List<Jira> searchByProductName(String productName){ return
+	 * entityManager.
+	 * createQuery("select j from Jira j where UPPER(j.getJiraProducts()) LIKE '%" +
+	 * productName + "%'", Jira.class).getResultList();
+	 * 
+	 * }
+	 */
 	
 
 }

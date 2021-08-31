@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import changemng_entities.Jira;
 import changemng_entities.Product;
 
 @Stateless
@@ -45,7 +47,6 @@ public class ProductService {
 		return entityManager.createQuery("select p from Product p where UPPER(p.productName) LIKE '%" + productName + "%'", Product.class).getResultList();
 	
 	}
-	
 	
 	
 }

@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -54,6 +56,8 @@ public class CustomerBean implements Serializable{
 		
 		customerService.addCustomer(customer);
 		init();
+		FacesContext.getCurrentInstance().addMessage("Great!",
+				new FacesMessage("Great!", "Customer is added!"));
 		return "GetAllCustomers";
 				
 	}
@@ -62,7 +66,7 @@ public class CustomerBean implements Serializable{
 		customerService.deleteCustomer(customerId);
 		init();
 		return "GetAllCustomers";
-		
+	
 	}
 	
 	public String updateCustomer(Customer customer) {

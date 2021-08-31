@@ -54,7 +54,11 @@
  
    
    <h:commandLink action = "#{loginBean.logout()}" value = "Log Out">
+	
    </h:commandLink>
+   
+   <h2 align="center" style="color:gray; font-size: large; font-style: italic;" > <h:messages showDetail="true"/></h2>
+		
    
 </h:form>
 
@@ -73,7 +77,8 @@
 		 <h:message for="cn"/>
 		
 		 <h:outputLabel value="Customer ManDay Rate" for="cmd" />
-		 <h:inputText value="#{customerBean.customer.mandayRate}" converterId="javax.faces.Double"  style="background-color:#FFFFE0" id="cmd" required="true" requiredMessage="*"/>
+		 <h:inputText value="#{customerBean.customer.mandayRate}" converterId="javax.faces.Double" style="background-color:#FFFFE0" id="cmd" required="true" requiredMessage="*"/>
+		 <!-- <f:validateDoubleRange minimum="2000" maximum="3000"/>   -->
 		 <h:message for="cmd"/>
 
 		<h:outputText />
@@ -81,7 +86,9 @@
 		<h:outputText />
 
 	</h:panelGrid>
-	
+
+	<h2 align="center" style="color:gray; font-size: large; font-style: italic;" > <h:messages showDetail="true"/></h2>
+			
  </h:form>
 
 </body> 

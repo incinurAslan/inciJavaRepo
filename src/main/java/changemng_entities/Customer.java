@@ -30,7 +30,14 @@ public class Customer {
 	 * ArrayList<Product>();
 	 */
 	
-	@ManyToMany(mappedBy = "jiraCustomers" , fetch = FetchType.EAGER) 
+	@ManyToMany(mappedBy = "jiraCustomers" , cascade =
+        {
+                CascadeType.DETACH,
+                CascadeType.MERGE,
+                CascadeType.REFRESH,
+                CascadeType.PERSIST
+        }, fetch = FetchType.EAGER) 
+	
 	private List<Jira> customerJiras = new ArrayList<Jira>();
 		
 
