@@ -3,6 +3,8 @@ package changemng_services;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -38,7 +40,18 @@ public class CustomerService {
 	
 	public void deleteCustomer(int customerID) {
 		 Customer deletedCustomer =  entityManager.find(Customer.class, customerID);
+		 
+		// deletedCustomer.setCustomerJiras(null); //jiralara dokunmadan customer'ı silmesi için deniyorum
+		 
+		 if(deletedCustomer.getCustomerJiras() != null) {
+			 
+			FacesContext.getCurrentInstance().addMessage("Sorry!",
+						new FacesMessage("Sorry!", "The customer has registered jiras inside. Cannot be deleted!"));
+			
+		 }
 		 entityManager.remove(deletedCustomer);	
+		 
+		 
 	}
 
 	public void updateCustomer(Customer customer) {

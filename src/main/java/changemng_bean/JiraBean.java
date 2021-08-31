@@ -233,7 +233,8 @@ public class JiraBean implements Serializable{
 		
 		jiraService.deleteJira(jiraId);
 		
-		init();
+		//init();
+		System.out.println("delete worked");
 		
 		return "GetAllJiras";
 	}
