@@ -78,14 +78,12 @@ public class JiraService {
 	}
 	
 	
-	/*
-	 * public List<Jira> searchByProductName(String productName){ return
-	 * entityManager.
-	 * createQuery("select j from Jira j where UPPER(j.getJiraProducts()) LIKE '%" +
-	 * productName + "%'", Jira.class).getResultList();
-	 * 
-	 * }
-	 */
+
+    public List<Jira> searchByProductName(String productName) {
+        return entityManager.createQuery("select distinct j from Jira j join j.jiraProducts p where upper(p.productName) LIKE '%" + productName + "%'", Jira.class).getResultList();
+    }
+	
+
 	
 
 }

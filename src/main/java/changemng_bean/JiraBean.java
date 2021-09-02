@@ -380,21 +380,6 @@ public class JiraBean implements Serializable{
 	}
 	
 	
-	
-	  public List<Jira> getJirasByJiraNo(){
-	  
-	  jiras = jiraService.getAllJiras();
-	  
-	  if(jira.getJiraNo() != null) {
-	  
-	  jiras = jiraService.searchByJiraNumber(jira.getJiraNo()); } 
-	  
-	  return jiras;
-	  
-	  }
-	 
-	
-	
 	public void searchJirasByJiraNo() {
 
 		if (jira.getJiraNo() != null) {
@@ -406,40 +391,42 @@ public class JiraBean implements Serializable{
 		jiras = jiraService.getAllJiras();
 		}
 
+	}
+	
+	
+	
+	public void searchJirasByProjectManager() {
+
+		if (jira.getProjectManager() != null) {
+
+		jiras = jiraService.searchByProjectManagerName(jira.getProjectManager());
+
+		} else {
+
+		jiras = jiraService.getAllJiras();
+		}
+
+	}
+	
+	public void searchJirasByProduct() {
+
+		if (jira.getJiraProducts() != null) {
+
+			for(Product prod: jira.getJiraProducts()) {
+				
+				jiras = jiraService.searchByProductName(prod.getProductName());
+
+			}
+		
+		} else {
+
+		jiras = jiraService.getAllJiras();
+		}
+
 		}
 	
-		/*
-		 * public List<Jira> getJirasByProjectManagerName(){
-		 * 
-		 * jiras = jiraService.getAllJiras();
-		 * 
-		 * if(jira.getProjectManager() != null) {
-		 * 
-		 * jiras = jiraService.searchByProjectManagerName(jira.getProjectManager()); }
-		 * 
-		 * return jiras;
-		 * 
-		 * 
-		 * }
-		 */
 
-	 
-		/*
-		 * public List<Jira> getJirasByProductName(){
-		 * 
-		 * jiras = jiraService.getAllJiras();
-		 * 
-		 * if(jira.getJiraProducts() != null) {
-		 * 
-		 * for (Product prod : jira.getJiraProducts()) {
-		 * 
-		 * jiras = jiraService.searchByProductName(prod.getProductName());} }
-		 * 
-		 * return jiras;
-		 * 
-		 * }
-		 */
-
+	
 	public String viewJira(Jira jira) {
 		
 		selectedJira = jira;

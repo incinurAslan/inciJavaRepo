@@ -67,17 +67,32 @@
 
 <h:form>
 
-<!-- <h:outputLabel value="Search By Jira No: " style="font-style: italic; "/>
-<h:inputText value="#{jiraBean.jira.jiraNo}" onkeypress="#{jiraBean.jirasByJiraNo}"/>
- -->
- 
 <h:inputText value="#{jiraBean.jira.jiraNo}"/>
-<h:commandButton action="#{jiraBean.searchJirasByJiraNo()}" value="jirayagöreara."/>
+<h:commandButton action="#{jiraBean.searchJirasByJiraNo()}" value="SeachByJiraNo"/>
 
 	<h:outputText value="&#160;" />
 	<h:outputText value="&#160;" />
-	
 </h:form>
+
+
+<h:form>
+
+<h:inputText value="#{jiraBean.jira.projectManager}"/>
+<h:commandButton action="#{jiraBean.searchJirasByProjectManager()}" value="SeachByPM" />
+
+	<h:outputText value="&#160;" />
+	<h:outputText value="&#160;" />
+</h:form>
+
+<!-- 
+<h:form>
+
+<h:inputText value="#{productBean.product.productName}"/>
+<h:commandButton action="#{jiraBean.searchJirasByProduct()}" value="SeachByProduct"/>
+
+	<h:outputText value="&#160;" />
+	<h:outputText value="&#160;" />
+</h:form> -->
 
 </div>
 
