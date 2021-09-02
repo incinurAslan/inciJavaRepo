@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -17,8 +18,8 @@ public class SupplierInvoiceStatus {
 	private String supplierInvoiceStatus;
 	
 	
-	@OneToOne(mappedBy = "SupplierInvoiceStatusOfJira" ,cascade = {CascadeType.ALL})
-	private Jira jiraSupplierStatus;
+	//@OneToOne(mappedBy = "SupplierInvoiceStatusOfJira" ,cascade = {CascadeType.ALL})
+	//private Jira jiraSupplierStatus;
 
 	
 	public SupplierInvoiceStatus() {
@@ -51,25 +52,13 @@ public class SupplierInvoiceStatus {
 		this.supplierInvoiceStatus = supplierInvoiceStatus;
 	}
 
-
-	public Jira getJiraSupplierStatus() {
-		return jiraSupplierStatus;
-	}
-
-
-	public void setJiraSupplierStatus(Jira jiraSupplierStatus) {
-		this.jiraSupplierStatus = jiraSupplierStatus;
-	}
-
-
+	
 	@Override
 	public String toString() {
 		return "SupplierInvoiceStatus [supplierInvoiceStatusNo=" + supplierInvoiceStatusNo + ", supplierInvoiceStatus="
 				+ supplierInvoiceStatus + "]";
 	}
 
-	
-	
 	
 	
 

@@ -27,7 +27,7 @@ public class LoginBean implements Serializable{
 	private boolean loggedIn;
 	private String role;
 	
-	private String accessPage = "GetAllJiras";
+	private String accessPage = "/secure/GetAllJiras";
 	
 	public String login()
 	{

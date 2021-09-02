@@ -21,8 +21,6 @@ public class SupplierInvoice {
 	@OneToOne(mappedBy = "supplierJiraInvoice" ,cascade = {CascadeType.ALL}) 
 	private Jira supplierInvoicedJira;
 	
-
-	
 	public SupplierInvoice() {
 		super();
 	}

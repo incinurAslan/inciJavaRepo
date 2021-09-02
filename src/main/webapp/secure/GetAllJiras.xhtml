@@ -67,19 +67,12 @@
 
 <h:form>
 
-<h:outputLabel value="Search By Jira No: " style="font-style: italic; "/>
+<!-- <h:outputLabel value="Search By Jira No: " style="font-style: italic; "/>
 <h:inputText value="#{jiraBean.jira.jiraNo}" onkeypress="#{jiraBean.jirasByJiraNo}"/>
-
-	<h:outputText value="&#160;" />
-	<h:outputText value="&#160;" />
-	
-</h:form>
-
-<h:form>
-
-<h:outputLabel value="Search By PM: " style="font-style: italic; "/>
-
-<h:inputText value="#{jiraBean.jira.projectManager}" onkeypress="#{jiraBean.jirasByProjectManagerName}"/>
+ -->
+ 
+<h:inputText value="#{jiraBean.jira.jiraNo}"/>
+<h:commandButton action="#{jiraBean.searchJirasByJiraNo()}" value="jirayagöreara."/>
 
 	<h:outputText value="&#160;" />
 	<h:outputText value="&#160;" />
@@ -147,8 +140,7 @@
 			<h:commandLink action="#{jiraBean.deleteJira(jira.jiraNr)}" value="Delete" />
 		
 		</h:column></td>
-		
-		
+				
 		</tr>
 		
 	</ui:repeat>

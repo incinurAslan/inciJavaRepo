@@ -66,13 +66,11 @@ public class JiraService {
 	}
 	
 	
-	
 	public List<Jira> searchByProjectManagerName(String projectManagerName){
 		  return entityManager.createQuery("select j from Jira j where UPPER(j.projectManager) LIKE '%" + projectManagerName + "%'", Jira.class).getResultList();
 	  
 	}
 	 
-	
 	
 	public List<Jira> searchByJiraNumber(String jiraNo){
 		return entityManager.createQuery("select j from Jira j where UPPER(j.jiraNo) LIKE '%" + jiraNo + "%'", Jira.class).getResultList();

@@ -58,14 +58,14 @@ public class CustomerBean implements Serializable{
 		init();
 		FacesContext.getCurrentInstance().addMessage("Great!",
 				new FacesMessage("Great!", "Customer is added!"));
-		return "GetAllCustomers";
+		return "/secure/GetAllCustomers";
 				
 	}
 
 	public String deleteCustomer(int customerId) {
 		customerService.deleteCustomer(customerId);
 		init();
-		return "GetAllCustomers";
+		return "/secure/GetAllCustomers";
 	
 	}
 	
@@ -84,7 +84,7 @@ public class CustomerBean implements Serializable{
 	
 	public String updateCustomer2() {
 		customerService.updateCustomer(selectedCustomer);
-		return "/GetAllCustomers.xhtml?faces-redirect=true";
+		return "/secure/GetAllCustomers.xhtml?faces-redirect=true";
 	}
 	
 	
@@ -92,10 +92,9 @@ public class CustomerBean implements Serializable{
 		
 		selectedCustomer = customer;
 		
-		return "/UpdateCustomer.xhtml?faces-redirect=true"; 
+		return "/secure/UpdateCustomer.xhtml?faces-redirect=true"; 
 		
 	}
-	
 	
 	public List<Customer> getCustomersByCustName(){
 		

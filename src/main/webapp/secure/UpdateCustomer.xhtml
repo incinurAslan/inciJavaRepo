@@ -76,6 +76,8 @@
 
 <h3 style="border-bottom-style: double;">Update Customer Details</h3>
 	
+<h:form>
+
 	<h:panelGrid columns="4">
 		 <h:outputLabel value="Customer Name" for="cnm" />
 		 <h:inputText value="#{customerBean.selectedCustomer.customerName}" id="cnm" required="true" requiredMessage="*" style="background-color:#FFFFE0"/>
@@ -100,6 +102,8 @@
 		<h:outputText />
 			
 	</h:panelGrid>
+
+</h:form>	
 
 </body> 
 </html>

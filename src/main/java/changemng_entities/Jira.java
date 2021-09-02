@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 
@@ -51,14 +53,11 @@ public class Jira {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Customer> jiraCustomers = new HashSet<Customer>();
 
-	
-	@OneToOne
+	@ManyToOne
 	private InvoiceStatus InvoiceStatusJira;
 	
-	
-	@OneToOne
+	@ManyToOne
 	private SupplierInvoiceStatus SupplierInvoiceStatusOfJira;
-	
 	
 	
 	public Jira() {
@@ -73,7 +72,6 @@ public class Jira {
 		this.jiraStatus = jiraStatus;
 		this.creationDate = creationDate;
 		this.projectManager = projectManager;
-
 	}
 
 

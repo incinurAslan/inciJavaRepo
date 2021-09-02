@@ -47,7 +47,7 @@ public class ProductBean implements Serializable {
 		
 		productService.addProduct(product);
 		init();
-		return "GetAllProducts";
+		return "/secure/GetAllProducts";
 				
 	}
 
@@ -66,7 +66,7 @@ public class ProductBean implements Serializable {
 
 		selectedProduct.setProductName(selectedProduct.getProductName());
 		init();
-		return "GetAllProducts";
+		return "/secure/GetAllProducts";
 		
 	}
 	
@@ -76,7 +76,7 @@ public class ProductBean implements Serializable {
 		
 		selectedProduct = product;
 		
-		return "/UpdateProduct.xhtml?faces-redirect=true"; 
+		return "/secure/UpdateProduct.xhtml?faces-redirect=true"; 
 		
 	}
 	

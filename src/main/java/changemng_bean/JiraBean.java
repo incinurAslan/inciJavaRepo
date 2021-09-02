@@ -114,7 +114,6 @@ public class JiraBean implements Serializable{
 		this.selectedJira = new Jira();
 		this.newJira = new Jira();
 		
-		
 		invoiceStatusList = invoiceService.getAllInvoiceStatus();
 		supplierInvoiceStatusList = supplierInvoiceStatusService.getAllSupplierInvoiceStatus();
 		
@@ -224,7 +223,7 @@ public class JiraBean implements Serializable{
 		FacesContext.getCurrentInstance().addMessage("Successful!",
 				new FacesMessage("Successful!", "The new jira is registered!"));
 		init();
-		return "GetAllJiras";
+		return "/secure/GetAllJiras";
 		
 	}
 	
@@ -236,7 +235,7 @@ public class JiraBean implements Serializable{
 		//init();
 		System.out.println("delete worked");
 		
-		return "GetAllJiras";
+		return "/secure/GetAllJiras";
 	}
 	
 	
@@ -381,32 +380,48 @@ public class JiraBean implements Serializable{
 	}
 	
 	
-	public List<Jira> getJirasByJiraNo(){
 	
+	  public List<Jira> getJirasByJiraNo(){
+	  
+	  jiras = jiraService.getAllJiras();
+	  
+	  if(jira.getJiraNo() != null) {
+	  
+	  jiras = jiraService.searchByJiraNumber(jira.getJiraNo()); } 
+	  
+	  return jiras;
+	  
+	  }
+	 
+	
+	
+	public void searchJirasByJiraNo() {
+
+		if (jira.getJiraNo() != null) {
+
+		jiras = jiraService.searchByJiraNumber(jira.getJiraNo());
+
+		} else {
+
 		jiras = jiraService.getAllJiras();
-		
-		if(jira.getJiraNo() != null) {
-			
-			jiras = jiraService.searchByJiraNumber(jira.getJiraNo());
 		}
-		return jiras;
-		
-	}
+
+		}
 	
-	
-	
-	  public List<Jira> getJirasByProjectManagerName(){
-	  
-		    jiras = jiraService.getAllJiras();
-	  
-		  	if(jira.getProjectManager() != null) {
-	  
-		  	jiras = jiraService.searchByProjectManagerName(jira.getProjectManager()); }
-		  	
-		  	return jiras;
-		  	
-		  	
-	  	}
+		/*
+		 * public List<Jira> getJirasByProjectManagerName(){
+		 * 
+		 * jiras = jiraService.getAllJiras();
+		 * 
+		 * if(jira.getProjectManager() != null) {
+		 * 
+		 * jiras = jiraService.searchByProjectManagerName(jira.getProjectManager()); }
+		 * 
+		 * return jiras;
+		 * 
+		 * 
+		 * }
+		 */
 
 	 
 		/*
@@ -424,15 +439,12 @@ public class JiraBean implements Serializable{
 		 * 
 		 * }
 		 */
-	  		
-	  
-	  
-	
+
 	public String viewJira(Jira jira) {
 		
 		selectedJira = jira;
 		
-		return "/updateJira.xhtml?faces-redirect=true"; 
+		return "/secure/updateJira.xhtml?faces-redirect=true"; 
 		
 	}
 
