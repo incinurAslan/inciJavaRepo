@@ -408,22 +408,25 @@ public class JiraBean implements Serializable{
 
 	}
 	
+	
 	public void searchJirasByProductName() {
 
-		if (jira.getJiraProducts() != null) {
-
-			for(Product prod: jira.getJiraProducts()) {
+		for(Product prod: jira.getJiraProducts()) {
+				
+			if (prod.getProductName() != null) {
 				
 				jiras = jiraService.searchByProductName(prod.getProductName());
 
-			}
+			}else {
+			
+			jiras = jiraService.getAllJiras();
 		
-		} else {
-
-		jiras = jiraService.getAllJiras();
+			}
+	
 		}
-
 	}
+	
+
 	
 	
 	public String viewJira(Jira jira) {
