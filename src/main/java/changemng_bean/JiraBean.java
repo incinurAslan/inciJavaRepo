@@ -408,7 +408,7 @@ public class JiraBean implements Serializable{
 
 	}
 	
-	public void searchJirasByProduct() {
+	public void searchJirasByProductName() {
 
 		if (jira.getJiraProducts() != null) {
 
@@ -423,9 +423,8 @@ public class JiraBean implements Serializable{
 		jiras = jiraService.getAllJiras();
 		}
 
-		}
+	}
 	
-
 	
 	public String viewJira(Jira jira) {
 		

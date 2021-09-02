@@ -22,10 +22,7 @@ public class ProductBean implements Serializable {
 
 	private Product product;
 	 
-	
 	private List<Product> products;
-	
-	//private List<Product> selectedProducts;
 	
 	private int productId;
 	
@@ -81,19 +78,19 @@ public class ProductBean implements Serializable {
 	}
 	
 	
-	
-	public List<Product> getProductsByProdName(){
-		
-		products = productService.getAllProducts();
-		
-		if(product.getProductName() != null) {
-			
-			products = productService.searchByProductName(product.getProductName());
-			
-		}
-		
-		return products;
-	}
+	/*
+	 * public List<Product> getProductsByProdName(){
+	 * 
+	 * products = productService.getAllProducts();
+	 * 
+	 * if(product.getProductName() != null) {
+	 * 
+	 * products = productService.searchByProductName(product.getProductName());
+	 * 
+	 * }
+	 * 
+	 * return products; }
+	 */
 	
 	
 	public void setProductService(ProductService productService) {

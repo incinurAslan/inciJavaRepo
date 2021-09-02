@@ -30,11 +30,6 @@ public class Product {
 	private List<Jira> productJiras = new ArrayList<Jira>();
 		
 
-	//@ManyToMany(mappedBy = "customerProducts", cascade = {CascadeType.REMOVE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
-	
-//	private List<Customer> productCustomers = new ArrayList<Customer>();
-	
-	
 	public Product() {
 		super();
 	}
