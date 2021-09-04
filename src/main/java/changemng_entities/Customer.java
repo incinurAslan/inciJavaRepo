@@ -30,14 +30,11 @@ public class Customer {
 	 * ArrayList<Product>();
 	 */
 	
-	@ManyToMany(mappedBy = "jiraCustomers" , cascade =
-        {
-                CascadeType.DETACH,
-                CascadeType.MERGE,
-                CascadeType.REFRESH,
-                CascadeType.PERSIST
-        }, fetch = FetchType.EAGER) 
-	
+	/*
+	 * @ManyToMany(mappedBy = "jiraCustomers" , cascade = { CascadeType.REMOVE },
+	 * fetch = FetchType.EAGER)
+	 */
+	@ManyToMany(mappedBy = "jiraCustomers" , fetch = FetchType.EAGER)
 	private List<Jira> customerJiras = new ArrayList<Jira>();
 		
 
@@ -75,8 +72,6 @@ public class Customer {
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
-
-
 
 	public double getMandayRate() {
 		return mandayRate;

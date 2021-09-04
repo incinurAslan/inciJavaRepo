@@ -68,12 +68,12 @@
 
 <h2>Update Product Name</h2>
 
-<h:form>
 
 <h4>Selected Product Details:</h4>
 	Product No: <h:outputText value="#{productBean.selectedProduct.productNo}" style="background-color:#FFFFE0" />
 	Product Name: <h:outputText value="#{productBean.selectedProduct.productName}" style="background-color:#FFFFE0" />
 
+<h:form>
 
 <h3 style="border-bottom-style: double;">Update Product Name</h3>
 	
@@ -89,11 +89,12 @@
 
 
 		<h:outputText />
-		<h:commandButton action="#{productBean.updateProduct(productBean.selectedProduct)}" value="Update" />
+		<h:commandButton action="#{productBean.updateProduct()}" value="Update" />
 		<h:outputText />
 	
 	</h:panelGrid>
-
+	
+	
 </h:form>
 
 </body> 

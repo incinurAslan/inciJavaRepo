@@ -38,19 +38,19 @@ public class Jira {
 	private LocalDate liveApprovalDate;
 	private LocalDate releaseDate;
 	
-	@OneToOne(cascade = CascadeType.ALL) 
+	@OneToOne(cascade = CascadeType.REMOVE) 
 	private CustomerInvoice jiraInvoice;
 	
 
-	@OneToOne(cascade = CascadeType.ALL) 
+	@OneToOne(cascade = CascadeType.REMOVE) 
 	private SupplierInvoice supplierJiraInvoice;
 	
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private Set<Product> jiraProducts = new HashSet<Product>();
 	
 	//added lately
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private Set<Customer> jiraCustomers = new HashSet<Customer>();
 
 	@ManyToOne

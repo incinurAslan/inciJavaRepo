@@ -20,13 +20,12 @@ public class Product {
 	private int productNo;
 	private String productName;
 	
-	@ManyToMany(mappedBy = "jiraProducts" ,  cascade =
-        {
-                CascadeType.DETACH,
-                CascadeType.MERGE,
-                CascadeType.REFRESH,
-                CascadeType.PERSIST
-        }, fetch = FetchType.EAGER)
+	/*
+	 * @ManyToMany(mappedBy = "jiraProducts" , cascade = { CascadeType.DETACH,
+	 * CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST }, fetch =
+	 * FetchType.EAGER)
+	 */
+	@ManyToMany(mappedBy = "jiraProducts", fetch = FetchType.EAGER)
 	private List<Jira> productJiras = new ArrayList<Jira>();
 		
 

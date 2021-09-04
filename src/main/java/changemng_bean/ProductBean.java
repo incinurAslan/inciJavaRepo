@@ -44,31 +44,32 @@ public class ProductBean implements Serializable {
 		
 		productService.addProduct(product);
 		init();
-		return "/secure/GetAllProducts";
+		return "/secure/GetAllProducts.xhtml?faces-redirect=true";
 				
 	}
 
-	public void deleteProduct(int productId) {
+	public String deleteProduct(int productId) {
 		productService.deleteProduct(productId);
 		init();
+		return "/secure/GetAllProducts.xhtml?faces-redirect=true";
 		
 	}
-
+	
+	
 
 	public ProductService getProductService() {
 		return productService;
 	}
 	
-	public String updateProduct(Product product) {
-
-		selectedProduct.setProductName(selectedProduct.getProductName());
-		init();
-		return "/secure/GetAllProducts";
-		
+	
+	public String updateProduct() {
+		productService.updateProduct(selectedProduct);
+		return "/secure/GetAllProducts.xhtml?faces-redirect=true";
 	}
 	
+
 	
-	
+
 	public String viewProduct(Product product) {
 		
 		selectedProduct = product;
@@ -78,19 +79,19 @@ public class ProductBean implements Serializable {
 	}
 	
 	
-	/*
-	 * public List<Product> getProductsByProdName(){
-	 * 
-	 * products = productService.getAllProducts();
-	 * 
-	 * if(product.getProductName() != null) {
-	 * 
-	 * products = productService.searchByProductName(product.getProductName());
-	 * 
-	 * }
-	 * 
-	 * return products; }
-	 */
+	
+	  public List<Product> getProductsByProdName(){
+	  
+	  products = productService.getAllProducts();
+	  
+	  if(product.getProductName() != null) {
+	  
+	  products = productService.searchByProductName(product.getProductName());
+	  
+	  }
+	  
+	  return products; }
+	 
 	
 	
 	public void setProductService(ProductService productService) {

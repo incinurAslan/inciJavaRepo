@@ -3,9 +3,12 @@ package changemng_services;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import changemng_entities.Customer;
 import changemng_entities.Jira;
 import changemng_entities.Product;
 
@@ -31,9 +34,24 @@ public class ProductService {
 	
 	
 	public void deleteProduct(int productID) {
+		
 		 Product deletedProduct =  entityManager.find(Product.class, productID);
-		 entityManager.remove(deletedProduct);	
+		 
+		 
+		 for(Jira j : deletedProduct.getProductJiras()) {
+			 
+			 if(j != null) {
+				 FacesContext.getCurrentInstance().addMessage("Sorry!",
+							new FacesMessage("Sorry!", "The product has registered jiras inside. Cannot be deleted!"));
+				
+			 }else {
+				 
+				 entityManager.remove(deletedProduct);	
+				 
+			 }
+		 }
 	}
+	
 	
 
 	public void updateProduct(Product product) {
@@ -42,14 +60,12 @@ public class ProductService {
 		
 	}
 	
-	/*
-	 * public List<Product> searchByProductName(String productName){ return
-	 * entityManager.
-	 * createQuery("select p from Product p where UPPER(p.productName) LIKE '%" +
-	 * productName + "%'", Product.class).getResultList();
-	 * 
-	 * }
-	 */
+	
+	  public List<Product> searchByProductName(String productName){ 
+		  
+		  return entityManager.createQuery("select p from Product p where UPPER(p.productName) LIKE '%" + productName + "%'", Product.class).getResultList();
+	  }
+	 
 	
 	
 }

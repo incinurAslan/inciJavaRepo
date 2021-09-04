@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import changemng_entities.Customer;
+import changemng_entities.Jira;
 
 @Stateless
 public class CustomerService {
@@ -39,19 +40,21 @@ public class CustomerService {
 	
 	
 	public void deleteCustomer(int customerID) {
+		
 		 Customer deletedCustomer =  entityManager.find(Customer.class, customerID);
 		 
-		// deletedCustomer.setCustomerJiras(null); //jiralara dokunmadan customer'ı silmesi için deniyorum
-		 
-		 if(deletedCustomer.getCustomerJiras() != null) {
+		 for(Jira j : deletedCustomer.getCustomerJiras()) {
 			 
-			FacesContext.getCurrentInstance().addMessage("Sorry!",
-						new FacesMessage("Sorry!", "The customer has registered jiras inside. Cannot be deleted!"));
-			
+			 if(j != null) {
+				 FacesContext.getCurrentInstance().addMessage("Sorry!",
+							new FacesMessage("Sorry!", "The customer has registered jiras inside. Cannot be deleted!"));
+				
+			 }else {
+				 entityManager.remove(deletedCustomer);	
+				 
+			 }
 		 }
-		 entityManager.remove(deletedCustomer);	
-		 
-		 
+		
 	}
 
 	public void updateCustomer(Customer customer) {

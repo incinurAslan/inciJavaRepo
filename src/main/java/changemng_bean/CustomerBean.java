@@ -68,19 +68,7 @@ public class CustomerBean implements Serializable{
 		return "/secure/GetAllCustomers";
 	
 	}
-	
-	public String updateCustomer(Customer customer) {
-		
-		selectedCustomer.setCustomerName(selectedCustomer.getCustomerName());
-		selectedCustomer.setMandayRate(selectedCustomer.getMandayRate());
-		
-		customerService.updateCustomer(customer);
-		init();
-		
-		return "Successful";
-		//return "GetAllCustomers";
-		
-	}
+
 	
 	public String updateCustomer2() {
 		customerService.updateCustomer(selectedCustomer);
