@@ -38,19 +38,19 @@ public class Jira {
 	private LocalDate liveApprovalDate;
 	private LocalDate releaseDate;
 	
-	@OneToOne 
+	@OneToOne(cascade = CascadeType.ALL) 
 	private CustomerInvoice jiraInvoice;
 	
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL) 
 	private SupplierInvoice supplierJiraInvoice;
 	
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<Product> jiraProducts = new HashSet<Product>();
 	
 	//added lately
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<Customer> jiraCustomers = new HashSet<Customer>();
 
 	@ManyToOne
@@ -97,13 +97,7 @@ public class Jira {
 	}
 
 	public void setCreationDate(LocalDate creationDate) {
-		//tried to turn into Str and then LocalDate while persisting
-		
-		//String creationDateStr = creationDate.toString(); 
-		//DateTimeFormatter myFormatter = DateTimeFormatter.ISO_DATE;
-		//LocalDate creationDate1 = LocalDate.parse(creationDateStr, myFormatter);
-		//this.creationDate = creationDate1;
-		
+
 		this.creationDate = creationDate;
 	}
 

@@ -25,8 +25,6 @@ public class SupplierInvoice {
 		super();
 	}
 	
-
-
 	public SupplierInvoice(LocalDate supplierInvoiceDate) {
 		super();
 		this.supplierInvoiceDate = supplierInvoiceDate;

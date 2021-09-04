@@ -16,7 +16,6 @@ public class CustomerInvoice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int invoiceNo;
-//	private String customerInvoiceStatus;
 	private LocalDate customerInvoiceDate;
 	
 	
