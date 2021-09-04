@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -17,7 +16,6 @@ import javax.faces.component.html.HtmlInputText;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
 
 import changemng_entities.Customer;
 import changemng_entities.CustomerInvoice;
@@ -91,7 +89,11 @@ public class JiraBean implements Serializable{
 	private int newSelectedInvoice;
 	private int newSelectedSupplierInvoice;
 	
-	
+	private String productNameFilter;
+	private String customerNameFilter;
+	private String invoiceStatusFilter;
+	private String supplierInvoiceStatusFilter;
+		
 	private List<InvoiceStatus> invoiceStatusList;
 	private List<SupplierInvoiceStatus> supplierInvoiceStatusList;
 
@@ -126,6 +128,8 @@ public class JiraBean implements Serializable{
 		
 		this.products = productService.getAllProducts();
 		selectProducts = productService.getAllProducts();
+		
+		
 	
 	}
 	
@@ -278,10 +282,6 @@ public class JiraBean implements Serializable{
 		return sumStr;
 	}
 	
-	
-	
-	
-
 	public String updateJira(Jira jira) {
 	
 		//formatter
@@ -411,23 +411,63 @@ public class JiraBean implements Serializable{
 	
 	public void searchJirasByProductName() {
 
-		for(Product prod: jira.getJiraProducts()) {
-				
-			if (prod.getProductName() != null) {
-				
-				jiras = jiraService.searchByProductName(prod.getProductName());
-
-			}else {
+		if (productNameFilter != null) {
 			
-			jiras = jiraService.getAllJiras();
+		jiras = jiraService.searchByProductName(productNameFilter);
 		
-			}
-	
+		} else {
+
+		jiras = jiraService.getAllJiras();
+		
 		}
+
+	}
+	
+	
+	public void searchJirasByCustomerName() {
+
+		if (customerNameFilter != null) {
+			
+		jiras = jiraService.searchByCustomerName(customerNameFilter);
+		
+		} else {
+
+		jiras = jiraService.getAllJiras();
+		
+		}
+
+	}
+	
+	public void searchJirasByInvoiceStatus() {
+
+		if (invoiceStatusFilter != null) {
+			
+		jiras = jiraService.searchByInvoiceStatus(invoiceStatusFilter);
+		
+		} else {
+
+		jiras = jiraService.getAllJiras();
+		
+		}
+
+	}
+
+	
+	public void searchJirasBySupplierInvoiceStatus() {
+
+		if (supplierInvoiceStatusFilter != null) {
+			
+		jiras = jiraService.searchBySupplierInvoiceStatus(supplierInvoiceStatusFilter);
+		
+		} else {
+
+		jiras = jiraService.getAllJiras();
+		
+		}
+
 	}
 	
 
-	
 	
 	public String viewJira(Jira jira) {
 		
@@ -786,7 +826,47 @@ public class JiraBean implements Serializable{
 		this.inputCsDateComponent = inputCsDateComponent;
 	}
 
-	
+
+	public String getProductNameFilter() {
+		return productNameFilter;
+	}
+
+
+	public void setProductNameFilter(String productNameFilter) {
+		this.productNameFilter = productNameFilter;
+	}
+
+
+	public String getCustomerNameFilter() {
+		return customerNameFilter;
+	}
+
+
+	public void setCustomerNameFilter(String customerNameFilter) {
+		this.customerNameFilter = customerNameFilter;
+	}
+
+
+	public String getInvoiceStatusFilter() {
+		return invoiceStatusFilter;
+	}
+
+
+	public void setInvoiceStatusFilter(String invoiceStatusFilter) {
+		this.invoiceStatusFilter = invoiceStatusFilter;
+	}
+
+
+	public String getSupplierInvoiceStatusFilter() {
+		return supplierInvoiceStatusFilter;
+	}
+
+
+	public void setSupplierInvoiceStatusFilter(String supplierInvoiceStatusFilter) {
+		this.supplierInvoiceStatusFilter = supplierInvoiceStatusFilter;
+	}
+
+
 
 }
 

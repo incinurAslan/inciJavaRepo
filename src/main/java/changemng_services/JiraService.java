@@ -78,12 +78,22 @@ public class JiraService {
 	}
 	
 	
-
     public List<Jira> searchByProductName(String productName) {
         return entityManager.createQuery("select distinct j from Jira j join j.jiraProducts p where upper(p.productName) LIKE '%" + productName + "%'", Jira.class).getResultList();
     }
 	
 
-	
-
+    public List<Jira> searchByCustomerName(String customerName) {
+        return entityManager.createQuery("select distinct j from Jira j join j.jiraCustomers c where upper(c.customerName) LIKE '%" + customerName + "%'", Jira.class).getResultList();
+    }
+    
+    
+    public List<Jira> searchByInvoiceStatus(String invoiceStatus) {
+        return entityManager.createQuery("select distinct j from Jira j join j.InvoiceStatusJira i where upper(i.invoiceName) LIKE '%" + invoiceStatus + "%'", Jira.class).getResultList();
+    }
+    
+    public List<Jira> searchBySupplierInvoiceStatus(String suppInvoiceStatus) {
+        return entityManager.createQuery("select distinct j from Jira j join j.SupplierInvoiceStatusOfJira s where upper(s.supplierInvoiceStatus) LIKE '%" + suppInvoiceStatus + "%'", Jira.class).getResultList();
+    }
+    
 }

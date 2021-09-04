@@ -68,13 +68,14 @@
 <h:form>
 
 <h:inputText value="#{jiraBean.jira.jiraNo}"/>
-<h:commandButton action="#{jiraBean.searchJirasByJiraNo()}" value="SeachByJiraNo"/>
+<h:commandButton action="#{jiraBean.searchJirasByJiraNo()}" value="SeachByJiraNr"/>
 
 	<h:outputText value="&#160;" />
 	<h:outputText value="&#160;" />
+	
 </h:form>
-
-
+	
+	
 <h:form>
 
 <h:inputText value="#{jiraBean.jira.projectManager}"/>
@@ -84,14 +85,44 @@
 	<h:outputText value="&#160;" />
 </h:form>
 
-
 <h:form>
 
-<h:inputText value="#{productBean.product.productName}"/>
+<h:inputText value="#{jiraBean.productNameFilter}"/>
 <h:commandButton action="#{jiraBean.searchJirasByProductName()}" value="SearchByProduct"/>
 
 	<h:outputText value="&#160;" />
 	<h:outputText value="&#160;" />
+	
+</h:form>
+	
+
+<h:form>
+<h:inputText value="#{jiraBean.customerNameFilter}"/>
+<h:commandButton action="#{jiraBean.searchJirasByCustomerName()}" value="SearchByCustomer"/>
+
+	<h:outputText value="&#160;" />
+	<h:outputText value="&#160;" />
+
+</h:form>
+
+
+<h:form>
+<h:inputText value="#{jiraBean.invoiceStatusFilter}"/>
+<h:commandButton action="#{jiraBean.searchJirasByInvoiceStatus()}" value="SearchByInvoiceStatus"/>
+
+	<h:outputText value="&#160;" />
+	<h:outputText value="&#160;" />
+
+</h:form>
+
+
+<h:form>
+<h:inputText value="#{jiraBean.supplierInvoiceStatusFilter}"/>
+<h:commandButton action="#{jiraBean.searchJirasBySupplierInvoiceStatus()}" value="SearchBySupplierInvoiceStatus"/>
+
+	<h:outputText value="&#160;" />
+	<h:outputText value="&#160;" />
+
 </h:form>
 
 </div>
@@ -114,6 +145,10 @@
 <th>LiveApprovalDate</th>
 <th>ReleaseDate</th>
 <th>JiraPrice</th>
+<th>CustomerInvoiceStatus</th>
+<th>InvoiceDate</th>
+<th>SupplierInvoiceStatus</th>
+<th>SupplierInv.Date</th>
 <th>Update</th>
 <th>Delete</th>
 </tr>
@@ -144,6 +179,11 @@
 		<td>#{jira.liveApprovalDate}</td>
 		<td>#{jira.releaseDate}</td>
 		<td>#{jiraBean.getEachJiraPrice(jira)}</td>
+		<td>#{jira.invoiceStatusJira.invoiceName}</td>
+		<td>#{jira.jiraInvoice.customerInvoiceDate}</td>
+		<td>#{jira.supplierInvoiceStatusOfJira.supplierInvoiceStatus}</td>
+		<td>#{jira.supplierJiraInvoice.supplierInvoiceDate}</td>
+	
 		
 		<td><h:column>
 			<f:facet name="header">Action</f:facet>

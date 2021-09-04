@@ -75,7 +75,9 @@ public class PersistTestClass {
 		jira1.getJiraCustomers().add(customer8);
 		jira1.getJiraCustomers().add(customer7);
 		
+		jira1.getJiraProducts().add(product3);
 		
+
 		LocalDate crFormDate1 = LocalDate.of(2021, 7, 11);
 		jira1.setCrFormDate(crFormDate1);
 	
