@@ -6,8 +6,6 @@ import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import changemng_entities.Credentials;
 import changemng_entities.Customer;
 import changemng_entities.CustomerInvoice;
 import changemng_entities.InvoiceStatus;
@@ -199,14 +197,13 @@ public class PersistTestClass {
 		
 		User user1 = new User("Incinur", "Aslan", "iaslan", "81DC9BDB52D04DC20036DBD8313ED055", "Project Manager");
 		User user2 = new User("Demet", "Yel", "dyel", "674F3C2C1A8A6F90461E8A66FB5550BA", "Project Manager");
-		User user3 = new User("Serkan", "Lisan", "slisan", "ABCEEDF5017915685F379075F00A5CCD", "Project Manager");
+		User user3 = new User("Serkan", "Yazici", "syazici", "ABCEEDF5017915685F379075F00A5CCD", "Project Manager");
 		User user4 = new User("Simay", "Karahan ", "skarahan", "A01610228FE998F515A72DD730294D87", "Project Manager");
 		
 		entityManager.persist(user1);
 		entityManager.persist(user2);
 		entityManager.persist(user3);
 		entityManager.persist(user4);
-		
 		
 	}
 	

@@ -18,8 +18,8 @@ public class SupplierInvoice {
 	private int suppInvoiceNo;
 	private LocalDate supplierInvoiceDate;
 	
-	//@OneToOne(mappedBy = "supplierJiraInvoice" ,cascade = {CascadeType.ALL}) //kaldırıp dene
-	@OneToOne(mappedBy = "supplierJiraInvoice")
+	@OneToOne(mappedBy = "supplierJiraInvoice" ,cascade = {CascadeType.ALL}) //kaldırıp dene
+	//@OneToOne(mappedBy = "supplierJiraInvoice")
 	private Jira supplierInvoicedJira;
 	
 	public SupplierInvoice() {

@@ -24,8 +24,8 @@ public class CustomerInvoice {
 	}
 	
 	
-	//@OneToOne(mappedBy = "jiraInvoice", cascade = {CascadeType.ALL}) //((kaldırıp dene))
-	@OneToOne(mappedBy = "jiraInvoice")
+	@OneToOne(mappedBy = "jiraInvoice", cascade = {CascadeType.ALL}) //((kaldırıp dene))
+	//@OneToOne(mappedBy = "jiraInvoice")
 	private Jira invoicedJira;
 
 

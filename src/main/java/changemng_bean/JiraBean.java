@@ -227,7 +227,7 @@ public class JiraBean implements Serializable{
 		FacesContext.getCurrentInstance().addMessage("Successful!",
 				new FacesMessage("Successful!", "The new jira is registered!"));
 		init();
-		return "/secure/GetAllJiras";
+		return "/secure/GetAllJiras.xhtml?faces-redirect=true";
 		
 	}
 	
@@ -236,10 +236,10 @@ public class JiraBean implements Serializable{
 		
 		jiraService.deleteJira(jiraId);
 		
-		//init();
+		init();
 		System.out.println("delete worked");
 		
-		return "/secure/GetAllJiras";
+		return "/secure/GetAllJiras.xhtml?faces-redirect=true";
 	}
 	
 	
@@ -376,7 +376,7 @@ public class JiraBean implements Serializable{
 
 		jiraService.updateJiray(selectedJira);
 		
-		return "DONE! Jira details have been updated.";
+		return "/secure/GetAllJiras.xhtml?faces-redirect=true";
 	}
 	
 	
