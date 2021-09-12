@@ -58,15 +58,15 @@ public class CustomerBean implements Serializable{
 		init();
 		FacesContext.getCurrentInstance().addMessage("Great!",
 				new FacesMessage("Great!", "Customer is added!"));
-		return "/secure/GetAllCustomers";
+		return "/secure/GetAllCustomers.xhtml?faces-redirect=true";
 				
 	}
 
 	public String deleteCustomer(int customerId) {
 		customerService.deleteCustomer(customerId);
 		//customerService.deleteCustomer2(customerId);
-		init();
-		return "/secure/GetAllCustomers";
+		//init();
+		return "/secure/GetAllCustomers.xhtml?faces-redirect=true";
 	
 	}
 

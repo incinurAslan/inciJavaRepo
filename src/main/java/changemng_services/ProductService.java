@@ -44,13 +44,15 @@ public class ProductService {
 				 FacesContext.getCurrentInstance().addMessage("Sorry!",
 							new FacesMessage("Sorry!", "The product has registered jiras inside. Cannot be deleted!"));
 				
-			 }else {
+				 return;
+			 }
 				 
-				 entityManager.remove(deletedProduct);	
+				 
 				 
 			 }
+		 	entityManager.remove(deletedProduct);	
 		 }
-	}
+	
 	
 	
 
