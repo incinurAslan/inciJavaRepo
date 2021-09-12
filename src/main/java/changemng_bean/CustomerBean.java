@@ -64,6 +64,7 @@ public class CustomerBean implements Serializable{
 
 	public String deleteCustomer(int customerId) {
 		customerService.deleteCustomer(customerId);
+		//customerService.deleteCustomer2(customerId);
 		init();
 		return "/secure/GetAllCustomers";
 	

@@ -56,6 +56,30 @@ public class CustomerService {
 		 }
 		
 	}
+	
+	
+	
+	/*
+	 * public void deleteCustomer2(int customerID) {
+	 * 
+	 * Customer deletedCustomer = entityManager.find(Customer.class, customerID);
+	 * 
+	 * for(Jira j : deletedCustomer.getCustomerJiras()) {
+	 * 
+	 * if(j != null) { FacesContext.getCurrentInstance().addMessage("Sorry!", new
+	 * FacesMessage("Sorry!",
+	 * "The customer has registered jiras inside. Cannot be deleted!"));
+	 * 
+	 * }else { entityManager.
+	 * createQuery("delete from Customer c where c.customerNo = :customerID").
+	 * setParameter("customerID", customerID) .executeUpdate();
+	 * 
+	 * } }
+	 * 
+	 * }
+	 */
+	
+	
 
 	public void updateCustomer(Customer customer) {
 		

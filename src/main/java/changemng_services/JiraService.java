@@ -27,33 +27,7 @@ public class JiraService {
 		entityManager.persist(jira);
 	}
 
-	/*
-	 * public void deleteJira(int jiraID) {
-	 * 
-	 * Jira deletedJira = entityManager.find(Jira.class, jiraID);
-	 * 
-	 * 
-	 * for (Product prod : deletedJira.getJiraProducts()) {
-	 * 
-	 * entityManager.remove("SELECT p FROM Product WHERE p.productNo = " +
-	 * prod.getProductNo()); //product'ın kendisini siliyor mu kontrol et
-	 * 
-	 * }
-	 * 
-	 * for (Customer cust : deletedJira.getJiraCustomers()) {
-	 * 
-	 * entityManager.remove("SELECT c FROM Customer WHERE c.customerNo = " +
-	 * cust.getCustomerNo());
-	 * 
-	 * 
-	 * }
-	 * 
-	 * 
-	 * entityManager.remove(deletedJira);
-	 * 
-	 * }
-	 */
-
+	
 	public void deleteJira(int jiraID) {
 		Jira deletedJira = entityManager.find(Jira.class, jiraID);
 

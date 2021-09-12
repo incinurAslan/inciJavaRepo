@@ -376,6 +376,8 @@ public class JiraBean implements Serializable{
 
 		jiraService.updateJiray(selectedJira);
 		
+		init();
+		
 		return "/secure/GetAllJiras.xhtml?faces-redirect=true";
 	}
 	
